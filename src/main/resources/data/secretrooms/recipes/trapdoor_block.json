@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "secretrooms:solid_block"
+		},
+		{
+			"tag": "minecraft:wooden_trapdoors"
+		}
+	],
+	"result": {
+		"item": "secretrooms:trapdoor_block",
+		"count": 1
+	}
+}

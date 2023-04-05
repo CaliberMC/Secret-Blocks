@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"#C#",
+		"C#C",
+		"#C#"
+	],
+	"key": {
+		"#": {
+			"tag": "minecraft:wool"
+		},
+		"C": {
+			"item": "secretrooms:camouflage_paste"
+		}
+	},
+	"result": {
+		"item": "secretrooms:solid_block",
+		"count": 4
+	}
+}

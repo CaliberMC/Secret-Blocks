@@ -1,0 +1,52 @@
+{
+	"variants": {
+		"facing=east,half=bottom,open=false": {
+			"model": "secretrooms:block/camo_block"
+		},
+		"facing=east,half=bottom,open=true": {
+			"model": "secretrooms:block/camo_block"
+		},
+		"facing=east,half=top,open=false": {
+			"model": "secretrooms:block/camo_block"
+		},
+		"facing=east,half=top,open=true": {
+			"model": "secretrooms:block/camo_block"
+		},
+		"facing=north,half=bottom,open=false": {
+			"model": "secretrooms:block/camo_block"
+		},
+		"facing=north,half=bottom,open=true": {
+			"model": "secretrooms:block/camo_block"
+		},
+		"facing=north,half=top,open=false": {
+			"model": "secretrooms:block/camo_block"
+		},
+		"facing=north,half=top,open=true": {
+			"model": "secretrooms:block/camo_block"
+		},
+		"facing=south,half=bottom,open=false": {
+			"model": "secretrooms:block/camo_block"
+		},
+		"facing=south,half=bottom,open=true": {
+			"model": "secretrooms:block/camo_block"
+		},
+		"facing=south,half=top,open=false": {
+			"model": "secretrooms:block/camo_block"
+		},
+		"facing=south,half=top,open=true": {
+			"model": "secretrooms:block/camo_block"
+		},
+		"facing=west,half=bottom,open=false": {
+			"model": "secretrooms:block/camo_block"
+		},
+		"facing=west,half=bottom,open=true": {
+			"model": "secretrooms:block/camo_block"
+		},
+		"facing=west,half=top,open=false": {
+			"model": "secretrooms:block/camo_block"
+		},
+		"facing=west,half=top,open=true": {
+			"model": "secretrooms:block/camo_block"
+		}
+	}
+}

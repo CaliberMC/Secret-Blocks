@@ -1,0 +1,6 @@
+{
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "secretrooms:item/staff_of_camo"
+	}
+}

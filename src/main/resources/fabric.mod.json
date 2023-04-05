@@ -1,0 +1,43 @@
+{
+	"schemaVersion": 1,
+	"id": "secretrooms",
+	"version": "${version}",
+	"name": "Secret Rooms",
+	"description": "Like the secret rooms mod, but for fabric",
+	"authors": [
+		"CaliberMC"
+	],
+	"contact": {
+		"homepage": "*",
+		"sources": "https://github.com/CaliberMC/Secret-Rooms",
+		"issues": "https://github.com/CaliberMC/Secret-Rooms/issues"
+	},
+	"license": "MIT",
+	"icon": "assets/secretrooms/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.calibermc.secretrooms.SecretRooms"
+		],
+		"client": [
+			"net.calibermc.secretrooms.SecretRoomsClient"
+		]
+	},
+	"mixins": [
+		"secretrooms.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.18",
+		"fabric": "*",
+		"minecraft": "1.18.x",
+		"java": ">=17"
+	},
+	"suggests": {
+		"flamingo": "*"
+	},
+	"custom": {
+		"dashloader:customobject": [
+			"net.calibermc.secretrooms.dashloader.DashCamoBlockBakedModel"
+		]
+	}
+}

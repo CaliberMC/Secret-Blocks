@@ -1,0 +1,8 @@
+{
+	"parent": "block/slab",
+	"textures": {
+		"bottom": "minecraft:block/ancient_debris_top",
+		"top": "minecraft:block/farmland_moist",
+		"side": "minecraft:block/melon_side"
+	}
+}
