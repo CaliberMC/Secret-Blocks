@@ -6,7 +6,7 @@
 			"entries": [
 				{
 					"type": "minecraft:item",
-					"name": "secretrooms:stone_secret_button"
+					"name": "secretrooms:secret_button"
 				}
 			]
 		}

@@ -26,9 +26,9 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class SecretRedstone extends net.minecraft.block.RedstoneWireBlock implements BlockEntityProvider, CamoBlock {
+public class StoneButton extends net.minecraft.block.StoneButtonBlock implements BlockEntityProvider, CamoBlock {
 
-    public SecretRedstone(Settings settings) {
+    public StoneButton(Settings settings) {
         super(settings);
     }
 

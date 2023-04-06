@@ -7,6 +7,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
@@ -20,13 +21,18 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class SecretLever extends net.minecraft.block.StoneButtonBlock implements BlockEntityProvider, CamoBlock {
+public class SecretLever extends net.minecraft.block.LeverBlock implements BlockEntityProvider, CamoBlock {
 
     public SecretLever(Settings settings) {
         super(settings);
     }
+
+    private static final VoxelShape SHAPE = VoxelShapes.cuboid(0.0d, 0.0d, 0.0d, 1.0d, 1.0d, 1.0d);
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
@@ -68,6 +74,11 @@ public class SecretLever extends net.minecraft.block.StoneButtonBlock implements
     @Environment(EnvType.CLIENT)
     public boolean isSideInvisible(BlockState state, BlockState stateFrom, Direction direction) {
         return (stateFrom.getBlock() instanceof CamoBlock) ? true : super.isSideInvisible(state, stateFrom, direction);
+    }
+
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView blockView, BlockPos pos, ShapeContext context) {
+        return SHAPE;
     }
 }
 

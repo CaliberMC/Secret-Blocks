@@ -51,16 +51,19 @@ public class SecretRooms implements ModInitializer {
 	public static final Block DOOR_BLOCK = new DoorBlock(FabricBlockSettings.copy(SOLID_BLOCK));
 	public static final Block IRON_DOOR_BLOCK = new DoorBlock(FabricBlockSettings.copy(SOLID_BLOCK));
 
-	public static final Block SECRET_WOODEN_BUTTON = new SecretButton(FabricBlockSettings.copy(SOLID_BLOCK));
-	public static final Block SECRET_STONE_BUTTON = new SecretButton(FabricBlockSettings.copy(SOLID_BLOCK));
+	public static final Block WOODEN_BUTTON = new WoodButton(FabricBlockSettings.copy(SOLID_BLOCK));
+	public static final Block STONE_BUTTON = new StoneButton(FabricBlockSettings.copy(SOLID_BLOCK));
 
-	public static final Block SECRET_LEVER = new SecretButton(FabricBlockSettings.copy(SOLID_BLOCK));
-	public static final Block SECRET_REDSTONE = new SecretButton(FabricBlockSettings.copy(SOLID_BLOCK));
+	public static final Block SECRET_LEVER = new SecretLever(FabricBlockSettings.copy(SOLID_BLOCK));
+	public static final Block SECRET_OBSERVER = new SecretObserver(FabricBlockSettings.copy(SOLID_BLOCK));
+
+	public static final Block SECRET_REDSTONE = new SecretRedstone(FabricBlockSettings.copy(SOLID_BLOCK));
+
 
 	public static final Block TRAPDOOR_BLOCK = new TrapdoorBlock(FabricBlockSettings.copy(SOLID_BLOCK));
 	public static final Block IRON_TRAPDOOR_BLOCK = new TrapdoorBlock(FabricBlockSettings.copy(SOLID_BLOCK));
 
-	public static final Block[] camoBlocksList = { GHOST_BLOCK, SECRET_WOODEN_BUTTON, SECRET_STONE_BUTTON, SECRET_LEVER, SECRET_REDSTONE, SLAB_BLOCK, DOOR_BLOCK, IRON_DOOR_BLOCK, TRAPDOOR_BLOCK, IRON_TRAPDOOR_BLOCK, ONE_WAY_GLASS };
+	public static final Block[] camoBlocksList = { GHOST_BLOCK, WOODEN_BUTTON, STONE_BUTTON, SECRET_LEVER, SECRET_REDSTONE, SLAB_BLOCK, DOOR_BLOCK, IRON_DOOR_BLOCK, TRAPDOOR_BLOCK, IRON_TRAPDOOR_BLOCK, ONE_WAY_GLASS };
 
 	public static final ItemGroup SECRET_BLOCKS_GROUP = FabricItemGroupBuilder.create(id("secret_blocks")).icon(() -> new ItemStack(SecretRooms.CAMOUFLAGE_PASTE)).build();
 
@@ -84,10 +87,12 @@ public class SecretRooms implements ModInitializer {
 		Registry.register(Registry.BLOCK, id("door_block"), DOOR_BLOCK);
 		Registry.register(Registry.BLOCK, id("iron_door_block"), IRON_DOOR_BLOCK);
 
-		Registry.register(Registry.BLOCK, id("secret_wooden_button"), SECRET_WOODEN_BUTTON);
-		Registry.register(Registry.BLOCK, id("secret_stone_button"), SECRET_STONE_BUTTON);
+		Registry.register(Registry.BLOCK, id("wooden_button"), WOODEN_BUTTON);
+		Registry.register(Registry.BLOCK, id("stone_button"), STONE_BUTTON);
 
 		Registry.register(Registry.BLOCK, id("secret_lever"), SECRET_LEVER);
+		Registry.register(Registry.BLOCK, id("secret_observer"), SECRET_OBSERVER);
+
 		Registry.register(Registry.BLOCK, id("secret_redstone"), SECRET_REDSTONE);
 
 		Registry.register(Registry.BLOCK, id("trapdoor_block"), TRAPDOOR_BLOCK);
@@ -104,10 +109,12 @@ public class SecretRooms implements ModInitializer {
 		Registry.register(Registry.ITEM, id("door_block"), new BlockItem(DOOR_BLOCK, new FabricItemSettings().group(SECRET_BLOCKS_GROUP)));
 		Registry.register(Registry.ITEM, id("iron_door_block"), new BlockItem(IRON_DOOR_BLOCK, new FabricItemSettings().group(SECRET_BLOCKS_GROUP)));
 
-		Registry.register(Registry.ITEM, id("secret_wooden_button"), new BlockItem(SECRET_WOODEN_BUTTON, new FabricItemSettings().group(SECRET_BLOCKS_GROUP)));
-		Registry.register(Registry.ITEM, id("secret_stone_button"), new BlockItem(SECRET_STONE_BUTTON, new FabricItemSettings().group(SECRET_BLOCKS_GROUP)));
+		Registry.register(Registry.ITEM, id("wooden_button"), new BlockItem(WOODEN_BUTTON, new FabricItemSettings().group(SECRET_BLOCKS_GROUP)));
+		Registry.register(Registry.ITEM, id("stone_button"), new BlockItem(STONE_BUTTON, new FabricItemSettings().group(SECRET_BLOCKS_GROUP)));
 
 		Registry.register(Registry.ITEM, id("secret_lever"), new BlockItem(SECRET_LEVER, new FabricItemSettings().group(SECRET_BLOCKS_GROUP)));
+		Registry.register(Registry.ITEM, id("secret_observer"), new BlockItem(SECRET_OBSERVER, new FabricItemSettings().group(SECRET_BLOCKS_GROUP)));
+
 		Registry.register(Registry.ITEM, id("secret_redstone"), new BlockItem(SECRET_REDSTONE, new FabricItemSettings().group(SECRET_BLOCKS_GROUP)));
 
 		Registry.register(Registry.ITEM, id("trapdoor_block"), new BlockItem(TRAPDOOR_BLOCK, new FabricItemSettings().group(SECRET_BLOCKS_GROUP)));

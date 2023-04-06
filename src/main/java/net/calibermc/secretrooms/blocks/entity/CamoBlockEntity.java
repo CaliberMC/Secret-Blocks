@@ -324,12 +324,7 @@ public class CamoBlockEntity extends BlockEntity implements BlockEntityTicker<Ca
 	public static BlockState getState(Direction dir, NbtCompound tag) {
 		BlockState tempState = Blocks.STONE.getDefaultState();
 		switch (dir) {
-		case UP:
-			if (tag.contains("upState")) {
-				tempState = NbtHelper.toBlockState(tag.getCompound("upState"));
-			}
-			break;
-		case DOWN:
+			case DOWN:
 			if (tag.contains("downState")) {
 				tempState = NbtHelper.toBlockState(tag.getCompound("downState"));
 			}
@@ -354,7 +349,8 @@ public class CamoBlockEntity extends BlockEntity implements BlockEntityTicker<Ca
 				tempState = NbtHelper.toBlockState(tag.getCompound("westState"));
 			}
 			break;
-		default:
+			case UP:
+			default:
 			if (tag.contains("upState")) {
 				tempState = NbtHelper.toBlockState(tag.getCompound("upState"));
 			}
@@ -366,10 +362,7 @@ public class CamoBlockEntity extends BlockEntity implements BlockEntityTicker<Ca
 	public Direction getDir(Direction dir) {
 		Direction tempDir;
 		switch (dir) {
-		case UP:
-			tempDir = upDirection;
-			break;
-		case DOWN:
+			case DOWN:
 			tempDir = downDirection;
 			break;
 		case NORTH:
@@ -384,7 +377,8 @@ public class CamoBlockEntity extends BlockEntity implements BlockEntityTicker<Ca
 		case WEST:
 			tempDir = westDirection;
 			break;
-		default:
+			case UP:
+			default:
 			tempDir = upDirection;
 			break;
 		}
@@ -394,10 +388,7 @@ public class CamoBlockEntity extends BlockEntity implements BlockEntityTicker<Ca
 	public static Direction getDir(Direction dir, NbtCompound tag) {
 		Direction tempDir;
 		switch (dir) {
-		case UP:
-			tempDir = byName(tag.getString("upDirection"));
-			break;
-		case DOWN:
+			case DOWN:
 			tempDir = byName(tag.getString("downDirection"));
 			break;
 		case NORTH:
@@ -412,7 +403,8 @@ public class CamoBlockEntity extends BlockEntity implements BlockEntityTicker<Ca
 		case WEST:
 			tempDir = byName(tag.getString("westDirection"));
 			break;
-		default:
+			case UP:
+			default:
 			tempDir = byName(tag.getString("upDirection"));
 			break;
 		}
@@ -501,10 +493,7 @@ public class CamoBlockEntity extends BlockEntity implements BlockEntityTicker<Ca
 	public static int getRotation(Direction dir, NbtCompound tag) {
 		int tempInt;
 		switch (dir) {
-		case UP:
-			tempInt = tag.getInt("upRotation");
-			break;
-		case DOWN:
+			case DOWN:
 			tempInt = tag.getInt("downRotation");
 			break;
 		case NORTH:
@@ -519,7 +508,8 @@ public class CamoBlockEntity extends BlockEntity implements BlockEntityTicker<Ca
 		case WEST:
 			tempInt = tag.getInt("westRotation");
 			break;
-		default:
+			case UP:
+			default:
 			tempInt = tag.getInt("upRotation");
 			break;
 		}
