@@ -73,9 +73,9 @@ public class SlabBlock extends net.minecraft.block.SlabBlock implements BlockEnt
 		return (stateFrom.getBlock() instanceof CamoBlock) ? true : super.isSideInvisible(state, stateFrom, direction);
 	}
 
-	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		return VoxelShapes.fullCube();
-	}
+//	@Override
+//	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+//		return VoxelShapes.fullCube();
+//	}
 
 }

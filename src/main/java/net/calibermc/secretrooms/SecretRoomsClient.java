@@ -1,6 +1,7 @@
 package net.calibermc.secretrooms;
 
 import io.netty.buffer.Unpooled;
+import net.calibermc.secretrooms.gui.SecretInventoryScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -10,6 +11,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.calibermc.secretrooms.blocks.entity.CamoBlockEntity;
 import net.calibermc.secretrooms.render.CamoBlockResourceProvider;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
@@ -24,6 +26,8 @@ public class SecretRoomsClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 
+
+		HandledScreens.register(SecretRooms.SECRET_INVENTORY_SCREEN_HANDLER, SecretInventoryScreen::new);  //Screen handler
 		ModelLoadingRegistry.INSTANCE.registerResourceProvider(rm -> new CamoBlockResourceProvider());
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), SecretRooms.camoBlocksList);
 
@@ -73,5 +77,6 @@ public class SecretRoomsClient implements ClientModInitializer {
 		passedData.writeBoolean(glass);
 		ClientPlayNetworking.send(SecretRooms.id("hit_setter"), passedData);
 	}
+
 
 }

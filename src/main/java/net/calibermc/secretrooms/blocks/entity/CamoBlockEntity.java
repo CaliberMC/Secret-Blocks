@@ -75,18 +75,9 @@ public class CamoBlockEntity extends BlockEntity implements BlockEntityTicker<Ca
 
 	@Override
 	public void writeNbt(NbtCompound tag) {
-
 		super.writeNbt(tag);
 		serialize(tag);
 	}
-
-//	@Override
-//	public void readNbt(NbtCompound tag) {
-//		super.readNbt(tag);
-//		deserialize(tag);
-//
-//	}
-
 
 	@Override
 	public void readNbt(NbtCompound tag) {
@@ -97,17 +88,6 @@ public class CamoBlockEntity extends BlockEntity implements BlockEntityTicker<Ca
 			world.updateListeners(pos, null, null, 0);
 		}
 	}
-//	@Override
-//	public NbtCompound toClientTag(NbtCompound tag) {
-//		return writeNbt(tag);
-//	}
-
-
-//	@Override
-//	public void fromClientTag(NbtCompound tag) {
-//		readNbt(tag);
-//		update();
-//	}
 
 	public NbtCompound serialize(NbtCompound tag) {
 
@@ -296,10 +276,7 @@ public class CamoBlockEntity extends BlockEntity implements BlockEntityTicker<Ca
 	public BlockState getState(Direction dir) {
 		BlockState tempState;
 		switch (dir) {
-		case UP:
-			tempState = upState;
-			break;
-		case DOWN:
+			case DOWN:
 			tempState = downState;
 			break;
 		case NORTH:
@@ -314,7 +291,8 @@ public class CamoBlockEntity extends BlockEntity implements BlockEntityTicker<Ca
 		case WEST:
 			tempState = westState;
 			break;
-		default:
+			case UP:
+			default:
 			tempState = upState;
 			break;
 		}

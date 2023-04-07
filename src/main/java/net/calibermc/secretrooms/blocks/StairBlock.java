@@ -70,9 +70,17 @@ public class StairBlock extends net.minecraft.block.StairsBlock implements Block
 		return (stateFrom.getBlock() instanceof CamoBlock) ? true : super.isSideInvisible(state, stateFrom, direction);
 	}
 
-	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		return VoxelShapes.fullCube();
-	}
+
+// NO COLLISION
+//	@Override
+//	public VoxelShape getOutlineShape(BlockState state, BlockView blockView, BlockPos pos, ShapeContext context) {
+//		return VoxelShapes.empty();
+//	}
+
+// FULL COLLISION
+//	@Override
+//	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+//		return VoxelShapes.fullCube();
+//	}
 
 }

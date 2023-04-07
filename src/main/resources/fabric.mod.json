@@ -12,7 +12,7 @@
 		"sources": "https://github.com/CaliberMC/Secret-Rooms",
 		"issues": "https://github.com/CaliberMC/Secret-Rooms/issues"
 	},
-	"license": "MIT",
+	"license": "LGPL-3.0",
 	"icon": "assets/secretrooms/icon.png",
 	"environment": "*",
 	"entrypoints": {
