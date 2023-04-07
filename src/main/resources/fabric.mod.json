@@ -3,14 +3,14 @@
 	"id": "secretrooms",
 	"version": "${version}",
 	"name": "Secret Rooms",
-	"description": "Like the secret rooms mod, but for fabric",
+	"description": "The Secret Rooms Mod has finally come to Fabric!",
 	"authors": [
 		"CaliberMC"
 	],
 	"contact": {
 		"homepage": "*",
-		"sources": "https://github.com/CaliberMC/Secret-Rooms",
-		"issues": "https://github.com/CaliberMC/Secret-Rooms/issues"
+		"sources": "https://github.com/CaliberMC/Secret-Rooms-Fabric",
+		"issues": "https://github.com/CaliberMC/Secret-Rooms-Fabric/issues"
 	},
 	"license": "LGPL-3.0",
 	"icon": "assets/secretrooms/icon.png",
