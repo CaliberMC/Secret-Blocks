@@ -21,8 +21,6 @@
 	"block.secretrooms.secret_pressure_plate_player": "Secret Player Pressure Plate",
 	"block.secretrooms.secret_chest": "Secret Chest",
 	"block.secretrooms.secret_chest_trapped": "Secret Trapped Chest",
-	"block.secretrooms.hinge_gate_block": "Hinge Gate Camo Block",
-	"block.secretrooms.iron_hinge_gate_block": "Iron Hinge Gate Camo Block",
 	"block.secretrooms.trapdoor_block": "Secret Trapdoor",
 	"block.secretrooms.iron_trapdoor_block": "Secret Iron Trapdoor",
 	"item.secretrooms.camouflage_paste": "Camouflage Paste",

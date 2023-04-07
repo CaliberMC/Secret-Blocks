@@ -6,6 +6,8 @@ import net.calibermc.secretrooms.SecretRoomsClient;
 import net.calibermc.secretrooms.blocks.entity.CamoBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.enums.BlockHalf;
+import net.minecraft.block.enums.StairShape;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -71,16 +73,61 @@ public class StairBlock extends net.minecraft.block.StairsBlock implements Block
 	}
 
 
-// NO COLLISION
-//	@Override
-//	public VoxelShape getOutlineShape(BlockState state, BlockView blockView, BlockPos pos, ShapeContext context) {
-//		return VoxelShapes.empty();
-//	}
+	@Override  // COLLIDE ONLY WITH STAIR SHAPE
+	public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+		return (state.get(HALF) == BlockHalf.TOP ? TOP_SHAPES : BOTTOM_SHAPES)[SHAPE_INDICES[this.getShapeIndexIndex(state)]];
 
-// FULL COLLISION
-//	@Override
-//	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-//		return VoxelShapes.fullCube();
-//	}
+	}
+
+	@Override  // OUTLINE FULL CUBE
+	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+		return VoxelShapes.fullCube();
+
+	}
+
+    //Gets the stair shape for collision
+	private static final int[] SHAPE_INDICES;  // for stairs shape
+
+	private int getShapeIndexIndex(BlockState state) {
+		return ((StairShape)state.get(SHAPE)).ordinal() * 4 + ((Direction)state.get(FACING)).getHorizontal();
+	}
+
+	private static StairShape getStairShape(BlockState state, BlockView world, BlockPos pos) {
+		Direction direction = (Direction)state.get(FACING);
+		BlockState blockState = world.getBlockState(pos.offset(direction));
+		if (isStairs(blockState) && state.get(HALF) == blockState.get(HALF)) {
+			Direction direction2 = (Direction)blockState.get(FACING);
+			if (direction2.getAxis() != ((Direction)state.get(FACING)).getAxis() && isDifferentOrientation(state, world, pos, direction2.getOpposite())) {
+				if (direction2 == direction.rotateYCounterclockwise()) {
+					return StairShape.OUTER_LEFT;
+				}
+
+				return StairShape.OUTER_RIGHT;
+			}
+		}
+
+		BlockState blockState2 = world.getBlockState(pos.offset(direction.getOpposite()));
+		if (isStairs(blockState2) && state.get(HALF) == blockState2.get(HALF)) {
+			Direction direction3 = (Direction)blockState2.get(FACING);
+			if (direction3.getAxis() != ((Direction)state.get(FACING)).getAxis() && isDifferentOrientation(state, world, pos, direction3)) {
+				if (direction3 == direction.rotateYCounterclockwise()) {
+					return StairShape.INNER_LEFT;
+				}
+
+				return StairShape.INNER_RIGHT;
+			}
+		}
+
+		return StairShape.STRAIGHT;
+	}
+
+	private static boolean isDifferentOrientation(BlockState state, BlockView world, BlockPos pos, Direction dir) {
+		BlockState blockState = world.getBlockState(pos.offset(dir));
+		return !isStairs(blockState) || blockState.get(FACING) != state.get(FACING) || blockState.get(HALF) != state.get(HALF);
+	}
+
+	static {
+		SHAPE_INDICES = new int[]{12, 5, 3, 10, 14, 13, 7, 11, 13, 7, 11, 14, 8, 4, 1, 2, 4, 1, 2, 8};
+	}
 
 }

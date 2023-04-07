@@ -3,7 +3,7 @@
 	"id": "secretrooms",
 	"version": "${version}",
 	"name": "Secret Rooms",
-	"description": "The Secret Rooms Mod has finally come to Fabric!",
+	"description": "Secret blocks for secret rooms on Fabric",
 	"authors": [
 		"CaliberMC"
 	],
