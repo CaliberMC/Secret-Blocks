@@ -29,7 +29,8 @@ public class SecretRoomsClient implements ClientModInitializer {
 
 		HandledScreens.register(SecretRooms.SECRET_INVENTORY_SCREEN_HANDLER, SecretInventoryScreen::new);  //Screen handler
 		ModelLoadingRegistry.INSTANCE.registerResourceProvider(rm -> new CamoBlockResourceProvider());
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), SecretRooms.camoBlocksList);
+		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), SecretRooms.camoBlocksList);
+//		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), SecretRooms.glassBlocksList);
 
 		ClientPlayNetworking.registerGlobalReceiver(SecretRooms.id("update_side"), (client, handler, buf, responseSender) -> {
 			NbtCompound tag = buf.readNbt();

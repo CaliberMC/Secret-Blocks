@@ -47,13 +47,14 @@ public class SecretRooms implements ModInitializer {
 	public static final Identifier SECRET_INVENTORY = new Identifier(MOD_ID, "secret_dispenser");
 
 	public static BlockEntityType<CamoBlockEntity> CAMO_BLOCK_ENTITY;
-	public static final BlockEntityType<SecretInventoryEntity> SECRET_INVENTORY_ENTITY;
+	public static BlockEntityType<SecretInventoryEntity> SECRET_INVENTORY_ENTITY;
 
 	public static final Block SOLID_BLOCK = new SolidBlock(FabricBlockSettings.copy(Blocks.WHITE_WOOL));
 	public static final Block GHOST_BLOCK = new GhostBlock(FabricBlockSettings.copy(SOLID_BLOCK).noCollision());
 
 	public static final Block ONE_WAY_GLASS = new OneWayGlassBlock(FabricBlockSettings.copy(Blocks.GLASS));
 
+//	public static final Block SECRET_LADDER = new SecretLadder(FabricBlockSettings.copy(SOLID_BLOCK));
 	public static final Block STAIR_BLOCK = new StairBlock(SOLID_BLOCK.getDefaultState(), FabricBlockSettings.copy(SOLID_BLOCK));
 	public static final Block SLAB_BLOCK = new SlabBlock(FabricBlockSettings.copy(SOLID_BLOCK));
 
@@ -74,8 +75,10 @@ public class SecretRooms implements ModInitializer {
 	public static final Block TRAPDOOR_BLOCK = new TrapdoorBlock(FabricBlockSettings.copy(SOLID_BLOCK));
 	public static final Block IRON_TRAPDOOR_BLOCK = new TrapdoorBlock(FabricBlockSettings.copy(SOLID_BLOCK));
 
-	public static final Block[] camoBlocksList = { GHOST_BLOCK, SOLID_BLOCK, STAIR_BLOCK, WOODEN_BUTTON, STONE_BUTTON, SECRET_LEVER, SECRET_OBSERVER, SECRET_DISPENSER, SECRET_HOPPER, SECRET_REDSTONE, SLAB_BLOCK, DOOR_BLOCK, IRON_DOOR_BLOCK, TRAPDOOR_BLOCK, IRON_TRAPDOOR_BLOCK, ONE_WAY_GLASS };
-	public static final Block[] inventoryBlocksList = {  };
+	public static final Block[] camoBlocksList = { GHOST_BLOCK, SOLID_BLOCK, STAIR_BLOCK, WOODEN_BUTTON, STONE_BUTTON, SECRET_LEVER, SECRET_OBSERVER, SECRET_DISPENSER, SECRET_HOPPER, SECRET_REDSTONE, SLAB_BLOCK, DOOR_BLOCK, IRON_DOOR_BLOCK, TRAPDOOR_BLOCK, IRON_TRAPDOOR_BLOCK };
+//	public static final Block[] glassBlocksList = { SECRET_DISPENSER };
+	public static final Block[] inventoryBlocksList = { SECRET_DISPENSER };
+
 
 	public static final ItemGroup SECRET_BLOCKS_GROUP = FabricItemGroupBuilder.create(id("secret_blocks")).icon(() -> new ItemStack(SecretRooms.CAMOUFLAGE_PASTE)).build();
 
@@ -88,19 +91,21 @@ public class SecretRooms implements ModInitializer {
 	public static final ScreenHandlerType<SecretInventoryScreenHandler> SECRET_INVENTORY_SCREEN_HANDLER;
 
 	static {
-		CAMO_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, id("camo_block_entity_type"), FabricBlockEntityTypeBuilder.create(CamoBlockEntity::new, camoBlocksList).build());
-		SECRET_INVENTORY_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, id("secret_inventory_entity_type"), FabricBlockEntityTypeBuilder.create(SecretInventoryEntity::new, inventoryBlocksList).build(null));
 		SECRET_INVENTORY_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(SECRET_INVENTORY, SecretInventoryScreenHandler::new);
 	}
 
 	@Override
 	public void onInitialize() {
 
+		CAMO_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, id("camo_block_entity_type"), FabricBlockEntityTypeBuilder.create(CamoBlockEntity::new, camoBlocksList).build());
+		SECRET_INVENTORY_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, id("secret_inventory_entity_type"), FabricBlockEntityTypeBuilder.create(SecretInventoryEntity::new, inventoryBlocksList).build(null));
+
 		Registry.register(Registry.BLOCK, id("solid_block"), SOLID_BLOCK);
 		Registry.register(Registry.BLOCK, id("ghost_block"), GHOST_BLOCK);
 
 		Registry.register(Registry.BLOCK, id("one_way_glass"), ONE_WAY_GLASS);
 
+//		Registry.register(Registry.BLOCK, id("secret_ladder"), SECRET_LADDER);
 		Registry.register(Registry.BLOCK, id("stair_block"), STAIR_BLOCK);
 		Registry.register(Registry.BLOCK, id("slab_block"), SLAB_BLOCK);
 
@@ -125,6 +130,7 @@ public class SecretRooms implements ModInitializer {
 
 		Registry.register(Registry.ITEM, id("one_way_glass"), new BlockItem(ONE_WAY_GLASS, new FabricItemSettings().group(SECRET_BLOCKS_GROUP)));
 
+//		Registry.register(Registry.ITEM, id("secret_ladder"), new BlockItem(SECRET_LADDER, new FabricItemSettings().group(SECRET_BLOCKS_GROUP)));
 		Registry.register(Registry.ITEM, id("stair_block"), new BlockItem(STAIR_BLOCK, new FabricItemSettings().group(SECRET_BLOCKS_GROUP)));
 		Registry.register(Registry.ITEM, id("slab_block"), new BlockItem(SLAB_BLOCK, new FabricItemSettings().group(SECRET_BLOCKS_GROUP)));
 

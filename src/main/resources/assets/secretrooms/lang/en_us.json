@@ -3,6 +3,7 @@
 	"block.secretrooms.ghost_block": "Ghost Block",
 	"block.secretrooms.solid_block": "Dummy Block",
 	"block.secretrooms.one_way_glass": "One Way Glass",
+	"block.secretrooms.secret_ladder": "Secret Ladder",
 	"block.secretrooms.stair_block": "Secret Stairs",
 	"block.secretrooms.slab_block": "Secret Slab",
 	"block.secretrooms.door_block": "Secret Door",
