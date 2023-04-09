@@ -34,9 +34,8 @@ import java.util.Collection;
 public class SecretBlocks implements ModInitializer {
 
 	public static final String MOD_ID = "secretblocks";
-	public static Identifier id(String id) {
-		return new Identifier("secretblocks", id);
-	}
+	public static Identifier id(String id) { return new Identifier("secretblocks", id); }
+
 
 	// CREATIVE INVENTORY TAB GROUP
 	public static final ItemGroup SECRET_BLOCKS_GROUP = FabricItemGroupBuilder.create(id("secret_blocks")).icon(() -> new ItemStack(ModItems.CAMOUFLAGE_PASTE)).build();

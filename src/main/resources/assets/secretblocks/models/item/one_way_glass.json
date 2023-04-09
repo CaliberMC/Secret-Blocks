@@ -1,12 +1,6 @@
 {
-	"parent": "block/cube",
+	"parent": "item/generated",
 	"textures": {
-		"down": "minecraft:block/ancient_debris_top",
-		"up": "minecraft:block/farmland_moist",
-		"north": "minecraft:block/glass",
-		"east": "minecraft:block/melon_side",
-		"south": "minecraft:block/melon_side",
-		"west": "minecraft:block/melon_side",
-		"particle": "minecraft:block/melon_side"
+		"layer0": "secretblocks:item/one_way_glass"
 	}
 }

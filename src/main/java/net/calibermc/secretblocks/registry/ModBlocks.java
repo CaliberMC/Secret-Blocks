@@ -16,13 +16,7 @@ public class ModBlocks {
 
     // Blocks
     public static final Block SOLID_BLOCK = registerBlock("solid_block",
-            new SolidBlock(FabricBlockSettings.copy(Blocks.WHITE_WOOL).noCollision()), SecretBlocks.SECRET_BLOCKS_GROUP);
-
-    public static final Block GHOST_BLOCK = registerBlock("ghost_block",
-            new GhostBlock(FabricBlockSettings.copy(SOLID_BLOCK).noCollision()), SecretBlocks.SECRET_BLOCKS_GROUP);
-
-    public static final Block ONE_WAY_GLASS = registerBlock("one_way_glass",
-            new OneWayGlassBlock(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
+            new SolidBlock(FabricBlockSettings.copy(Blocks.WHITE_WOOL)), SecretBlocks.SECRET_BLOCKS_GROUP);
 
     public static final Block STAIR_BLOCK = registerBlock("stair_block",
             new StairBlock(SOLID_BLOCK.getDefaultState(), FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
@@ -30,11 +24,23 @@ public class ModBlocks {
     public static final Block SLAB_BLOCK = registerBlock("slab_block",
             new SlabBlock(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
 
+    public static final Block GHOST_BLOCK = registerBlock("ghost_block",
+            new GhostBlock(FabricBlockSettings.copy(SOLID_BLOCK).noCollision()), SecretBlocks.SECRET_BLOCKS_GROUP);
+
+    public static final Block ONE_WAY_GLASS = registerBlock("one_way_glass",
+            new OneWayGlassBlock(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
+
     public static final Block DOOR_BLOCK = registerBlock("door_block",
             new DoorBlock(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
 
     public static final Block IRON_DOOR_BLOCK = registerBlock("iron_door_block",
             new DoorBlock(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
+
+    public static final Block TRAPDOOR_BLOCK = registerBlock("trapdoor_block",
+            new TrapdoorBlock(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
+
+    public static final Block IRON_TRAPDOOR_BLOCK = registerBlock("iron_trapdoor_block",
+            new TrapdoorBlock(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
 
     public static final Block WOODEN_BUTTON = registerBlock("wooden_button",
             new WoodButton(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
@@ -45,8 +51,8 @@ public class ModBlocks {
     public static final Block SECRET_LEVER = registerBlock("secret_lever",
             new SecretLever(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
 
-    public static final Block SECRET_OBSERVER = registerBlock("secret_observer",
-            new SecretLever(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
+//    public static final Block SECRET_OBSERVER = registerBlock("secret_observer",
+//            new SecretLever(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
 
 //    public static final Block SECRET_DISPENSER = registerBlock("secret_dispenser",
 //            new SecretDispenser(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
@@ -60,25 +66,19 @@ public class ModBlocks {
     public static final Block SECRET_REDSTONE = registerBlock("secret_redstone",
             new SecretRedstone(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
 
-    public static final Block TRAPDOOR_BLOCK = registerBlock("trapdoor_block",
-            new TrapdoorBlock(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
-
-    public static final Block IRON_TRAPDOOR_BLOCK = registerBlock("iron_trapdoor_block",
-            new TrapdoorBlock(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
-
     public static final Block SECRET_CHEST = registerBlock("secret_chest",
             new SecretChest(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
 
 
     // Render Assignment
     public static final Block[] secretBlocksList = {
-            SOLID_BLOCK, GHOST_BLOCK, ONE_WAY_GLASS, STAIR_BLOCK, SLAB_BLOCK, DOOR_BLOCK,
-            IRON_DOOR_BLOCK, WOODEN_BUTTON, STONE_BUTTON, SECRET_LEVER, SECRET_OBSERVER,
-            SECRET_REDSTONE, TRAPDOOR_BLOCK, IRON_TRAPDOOR_BLOCK,
-            SECRET_CHEST
+            SOLID_BLOCK, STAIR_BLOCK, SLAB_BLOCK, GHOST_BLOCK, ONE_WAY_GLASS, DOOR_BLOCK,
+            IRON_DOOR_BLOCK, TRAPDOOR_BLOCK, IRON_TRAPDOOR_BLOCK, WOODEN_BUTTON, STONE_BUTTON,
+            SECRET_LEVER, SECRET_REDSTONE, SECRET_CHEST
+
     };
 
-    //  DISABLED BLOCKS ^ SECRET_DISPENSER, SECRET_HOPPER, PRESSURE_PLATE
+    //  DISABLED BLOCKS ^ SECRET_DISPENSER, SECRET_HOPPER, PRESSURE_PLATE, SECRET_OBSERVER
     //	public static final Block[] glassBlocksList = {  };  // For future use
 
     // Registry

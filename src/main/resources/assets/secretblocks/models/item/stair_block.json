@@ -1,8 +1,7 @@
 {
-	"parent": "block/stairs",
+	"parent": "item/generated",
 	"textures": {
-		"bottom": "minecraft:block/ancient_debris_top",
-		"top": "minecraft:block/farmland_moist",
-		"side": "minecraft:block/melon_side"
+		"layer0": "secretblocks:item/stair_block"
 	}
 }
+

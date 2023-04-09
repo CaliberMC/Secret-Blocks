@@ -5,10 +5,7 @@ import net.calibermc.secretblocks.SecretBlocksClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.calibermc.secretblocks.blocks.entity.SecretBlockEntity;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
@@ -19,6 +16,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class SolidBlock extends Block implements BlockEntityProvider, SecretBlock {
@@ -58,6 +58,12 @@ public class SolidBlock extends Block implements BlockEntityProvider, SecretBloc
 	@Environment(EnvType.CLIENT)
 	public boolean isSideInvisible(BlockState state, BlockState stateFrom, Direction direction) {
 		return (stateFrom.getBlock() instanceof SecretBlock) ? true : super.isSideInvisible(state, stateFrom, direction);
+	}
+
+	@Override  // OUTLINE FULL CUBE
+	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+		return VoxelShapes.fullCube();
+
 	}
 
 }

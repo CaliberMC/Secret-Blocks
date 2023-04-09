@@ -218,8 +218,8 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 		if (tag.contains("southRotation")) {
 			southRotation = tag.getInt("southRotation");
 		}
-		if (tag.contains("southRotation")) {
-			westRotation = tag.getInt("southRotation");
+		if (tag.contains("westRotation")) {
+			westRotation = tag.getInt("westRotation");
 		}
 	}
 

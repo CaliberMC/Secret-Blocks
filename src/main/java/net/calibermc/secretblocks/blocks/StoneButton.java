@@ -30,8 +30,6 @@ public class StoneButton extends net.minecraft.block.StoneButtonBlock implements
         super(settings);
     }
 
-//    private static final VoxelShape SHAPE = VoxelShapes.cuboid(0.0d, 0.0d, 0.0d, 1.0d, 1.0d, 1.0d);
-
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new SecretBlockEntity(pos, state);
@@ -71,10 +69,5 @@ public class StoneButton extends net.minecraft.block.StoneButtonBlock implements
         return VoxelShapes.fullCube();
 
     }
-
-//    @Override
-//    public VoxelShape getOutlineShape(BlockState state, BlockView blockView, BlockPos pos, ShapeContext context) {
-//        return SHAPE;
-//    }
 }
 
