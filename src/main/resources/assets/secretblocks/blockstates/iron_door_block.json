@@ -1,0 +1,100 @@
+{
+	"variants": {
+		"facing=east,half=lower,hinge=left,open=false": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=east,half=lower,hinge=left,open=true": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=east,half=lower,hinge=right,open=false": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=east,half=lower,hinge=right,open=true": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=east,half=upper,hinge=left,open=false": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=east,half=upper,hinge=left,open=true": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=east,half=upper,hinge=right,open=false": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=east,half=upper,hinge=right,open=true": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=north,half=lower,hinge=left,open=false": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=north,half=lower,hinge=left,open=true": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=north,half=lower,hinge=right,open=false": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=north,half=lower,hinge=right,open=true": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=north,half=upper,hinge=left,open=false": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=north,half=upper,hinge=left,open=true": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=north,half=upper,hinge=right,open=false": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=north,half=upper,hinge=right,open=true": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=south,half=lower,hinge=left,open=false": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=south,half=lower,hinge=left,open=true": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=south,half=lower,hinge=right,open=false": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=south,half=lower,hinge=right,open=true": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=south,half=upper,hinge=left,open=false": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=south,half=upper,hinge=left,open=true": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=south,half=upper,hinge=right,open=false": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=south,half=upper,hinge=right,open=true": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=west,half=lower,hinge=left,open=false": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=west,half=lower,hinge=left,open=true": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=west,half=lower,hinge=right,open=false": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=west,half=lower,hinge=right,open=true": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=west,half=upper,hinge=left,open=false": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=west,half=upper,hinge=left,open=true": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=west,half=upper,hinge=right,open=false": {
+			"model": "secretblocks:block/camo_block"
+		},
+		"facing=west,half=upper,hinge=right,open=true": {
+			"model": "secretblocks:block/camo_block"
+		}
+	}
+}

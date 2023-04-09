@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"#",
+		"T"
+	],
+	"key": {
+		"#": {
+			"item": "secretblocks:camolock_eye"
+		},
+		"T": {
+			"item": "minecraft:trident"
+		}
+	},
+	"result": {
+		"item": "secretblocks:switch_probe",
+		"count": 1
+	}
+}

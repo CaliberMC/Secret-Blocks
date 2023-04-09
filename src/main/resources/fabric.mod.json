@@ -1,30 +1,30 @@
 {
 	"schemaVersion": 1,
-	"id": "secretrooms",
+	"id": "secretblocks",
 	"version": "${version}",
-	"name": "Secret Rooms",
-	"description": "Secret blocks for secret rooms on Fabric",
+	"name": "Secret Blocks",
+	"description": "Like the Secret Rooms Mod but for Fabric!",
 	"authors": [
 		"CaliberMC"
 	],
 	"contact": {
 		"homepage": "*",
-		"sources": "https://github.com/CaliberMC/Secret-Rooms-Fabric",
-		"issues": "https://github.com/CaliberMC/Secret-Rooms-Fabric/issues"
+		"sources": "https://github.com/CaliberMC/Secret-Blocks",
+		"issues": "https://github.com/CaliberMC/Secret-Blocks/issues"
 	},
 	"license": "LGPL-3.0",
-	"icon": "assets/secretrooms/icon.png",
+	"icon": "assets/secretblocks/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.calibermc.secretrooms.SecretRooms"
+			"net.calibermc.secretblocks.SecretBlocks"
 		],
 		"client": [
-			"net.calibermc.secretrooms.SecretRoomsClient"
+			"net.calibermc.secretblocks.SecretBlocksClient"
 		]
 	},
 	"mixins": [
-		"secretrooms.mixins.json"
+		"secretblocks.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.14.18",
@@ -37,7 +37,7 @@
 	},
 	"custom": {
 		"dashloader:customobject": [
-			"net.calibermc.secretrooms.dashloader.DashCamoBlockBakedModel"
+			"net.calibermc.secretblocks.dashloader.DashSecretBlockBakedModel"
 		]
 	}
 }

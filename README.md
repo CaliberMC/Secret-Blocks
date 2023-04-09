@@ -1,2 +1,2 @@
-# Secret Rooms (Fabric)
-Secret blocks for secret rooms on Fabric
+# Secret Blocks (Fabric)
+Like the Secret Rooms Mod but for Fabric!
