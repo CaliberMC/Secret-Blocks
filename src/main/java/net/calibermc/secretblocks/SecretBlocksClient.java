@@ -2,7 +2,7 @@ package net.calibermc.secretblocks;
 
 import io.netty.buffer.Unpooled;
 import net.calibermc.secretblocks.registry.ModBlocks;
-import net.calibermc.secretblocks.registry.ModScreenHandlers;
+import net.calibermc.secretblocks.screen.ModScreenHandlers;
 import net.calibermc.secretblocks.screen.SecretChestScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;

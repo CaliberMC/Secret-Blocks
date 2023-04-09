@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "secretblocks:solid_block"
+		},
+		{
+			"tag": "minecraft:pressure_plates"
+		}
+	],
+	"result": {
+		"item": "secretblocks:pressure_plate",
+		"count": 1
+	}
+}

@@ -34,7 +34,7 @@ public class ModBlocks {
             new DoorBlock(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
 
     public static final Block IRON_DOOR_BLOCK = registerBlock("iron_door_block",
-            new IronDoorBlock(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
+            new DoorBlock(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
 
     public static final Block WOODEN_BUTTON = registerBlock("wooden_button",
             new WoodButton(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);

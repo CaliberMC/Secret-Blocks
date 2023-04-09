@@ -8,22 +8,22 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 
-public class SecretChestScreenHandler extends ScreenHandler {
+public class SecretDispenserScreenHandler extends ScreenHandler {
 
     private final Inventory inventory;
 
     //This constructor gets called on the client when the server wants it to open the screenHandler,
     //The client will call the other constructor with an empty Inventory and the screenHandler will automatically
     //sync this empty inventory with the inventory on the server.
-    public SecretChestScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(27)); //9 -> 27
+    public SecretDispenserScreenHandler(int syncId, PlayerInventory playerInventory) {
+        this(syncId, playerInventory, new SimpleInventory(9)); //9 -> 27
     }
 
     //This constructor gets called from the BlockEntity on the server without calling the other constructor first, the server knows the inventory of the container
     //and can therefore directly provide it as an argument. This inventory will then be synced to the client.
-    public SecretChestScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
+    public SecretDispenserScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
         super(ModScreenHandlers.SECRET_CHEST_SCREEN_HANDLER, syncId);
-        checkSize(inventory, 27); //9 -> 27
+        checkSize(inventory, 9); //9 -> 27
         this.inventory = inventory;
         //some inventories do custom logic when a player opens it.
         inventory.onOpen(playerInventory.player);
@@ -34,8 +34,8 @@ public class SecretChestScreenHandler extends ScreenHandler {
         int l;
         //Our inventory
         for (m = 0; m < 3; ++m) {
-            for (l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(inventory, l + m * 9, 8 + l * 18, 18 + m * 18));
+            for (l = 0; l < 3; ++l) {
+                this.addSlot(new Slot(inventory, l + m * 3, 62 + l * 18, 17 + m * 18));
             }
         }
         //The player inventory
