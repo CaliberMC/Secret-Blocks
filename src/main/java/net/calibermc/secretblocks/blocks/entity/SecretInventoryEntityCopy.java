@@ -1,7 +1,7 @@
 package net.calibermc.secretblocks.blocks.entity;
 
-import net.calibermc.secretblocks.SecretBlocks;
-import net.calibermc.secretblocks.gui.SecretInventoryScreenHandler;
+import net.calibermc.secretblocks.registry.ModEntities;
+import net.calibermc.secretblocks.screen.SecretChestScreenHandler;
 import net.calibermc.secretblocks.util.ImplementedInventory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -22,7 +22,7 @@ public class SecretInventoryEntityCopy extends BlockEntity implements NamedScree
 	private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(9, ItemStack.EMPTY);
 
 	public SecretInventoryEntityCopy(BlockPos pos, BlockState state) {
-		super(SecretBlocks.SECRET_INVENTORY_ENTITY, pos, state);
+		super(ModEntities.SECRET_INVENTORY_ENTITY, pos, state);
 	}
 
 	//From the ImplementedInventory Interface
@@ -40,7 +40,7 @@ public class SecretInventoryEntityCopy extends BlockEntity implements NamedScree
 	public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
 		//We provide *this* to the screenHandler as our class Implements Inventory
 		//Only the Server has the Inventory at the start, this will be synced to the client in the ScreenHandler
-		return new SecretInventoryScreenHandler(syncId, playerInventory, this);
+		return new SecretChestScreenHandler(syncId, playerInventory, this);
 	}
 
 	@Override

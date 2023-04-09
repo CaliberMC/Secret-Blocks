@@ -18,14 +18,14 @@
 	"block.secretblocks.secret_redstone": "Secret Redstone",
 	"block.secretblocks.secret_daylight_detector": "Secret Daylight Detector",
 	"block.secretblocks.hopper": "Secret Hopper",
-	"block.secretblocks.secret_pressure_plate": "Secret Pressure Plate",
-	"block.secretblocks.secret_pressure_plate_player": "Secret Player Pressure Plate",
+	"block.secretblocks.pressure_plate": "Secret Pressure Plate",
+	"block.secretblocks.player_pressure_plate": "Secret Player Pressure Plate",
 	"block.secretblocks.secret_chest": "Secret Chest",
 	"block.secretblocks.secret_chest_trapped": "Secret Trapped Chest",
 	"block.secretblocks.trapdoor_block": "Secret Trapdoor",
 	"block.secretblocks.iron_trapdoor_block": "Secret Iron Trapdoor",
 	"item.secretblocks.camouflage_paste": "Camouflage Paste",
-	"item.secretblocks.camolock_eye": "Goggles of True Vision",
+	"item.secretblocks.secret_goggles": "Secret Goggles",
 	"item.secretblocks.switch_probe": "Switch Probe",
 	"item.secretblocks.switch_probe_rotation_mode": "Rotator Probe"
 }

@@ -2,6 +2,7 @@
 	"schemaVersion": 1,
 	"id": "secretblocks",
 	"version": "${version}",
+
 	"name": "Secret Blocks",
 	"description": "Like the Secret Rooms Mod but for Fabric!",
 	"authors": [

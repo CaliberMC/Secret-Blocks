@@ -1,5 +1,6 @@
 package net.calibermc.secretblocks.blocks;
 
+import net.calibermc.secretblocks.SecretBlocks;
 import net.calibermc.secretblocks.SecretBlocksClient;
 import net.calibermc.secretblocks.blocks.entity.SecretBlockEntity;
 import net.fabricmc.api.EnvType;
@@ -13,9 +14,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -32,7 +30,7 @@ public class SecretLever extends net.minecraft.block.LeverBlock implements Block
         super(settings);
     }
 
-    private static final VoxelShape SHAPE = VoxelShapes.cuboid(0.0d, 0.0d, 0.0d, 1.0d, 1.0d, 1.0d);
+//    private static final VoxelShape SHAPE = VoxelShapes.cuboid(0.0d, 0.0d, 0.0d, 1.0d, 1.0d, 1.0d);
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
@@ -53,14 +51,6 @@ public class SecretLever extends net.minecraft.block.LeverBlock implements Block
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.getBlockEntity(pos) instanceof SecretBlockEntity) {
             SecretBlockEntity blockEntity = (SecretBlockEntity) world.getBlockEntity(pos);
-            ItemStack itemStack = player.getStackInHand(hand);
-            if (itemStack.getItem() == Items.HONEYCOMB) {
-                if (!blockEntity.waxed) {
-                    blockEntity.waxed = true;
-                    player.playSound(SoundEvents.BLOCK_HONEY_BLOCK_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    return ActionResult.SUCCESS;
-                }
-            }
         }
         return super.onUse(state, world, pos, player, hand, hit);
     }
@@ -77,8 +67,13 @@ public class SecretLever extends net.minecraft.block.LeverBlock implements Block
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView blockView, BlockPos pos, ShapeContext context) {
-        return SHAPE;
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return VoxelShapes.fullCube();
     }
+
+//    @Override
+//    public VoxelShape getOutlineShape(BlockState state, BlockView blockView, BlockPos pos, ShapeContext context) {
+//        return SHAPE;
+//    }
 }
 

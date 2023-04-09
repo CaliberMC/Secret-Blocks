@@ -6,8 +6,6 @@ import net.calibermc.secretblocks.blocks.TrapdoorBlock;
 import net.calibermc.secretblocks.mixin.AccessibleBakedQuad;
 import net.calibermc.secretblocks.mixin.DirectionAccessor;
 import net.calibermc.secretblocks.registry.ModEntities;
-import net.calibermc.secretblocks.screen.SecretChestScreenHandler;
-import net.calibermc.secretblocks.util.ImplementedInventory;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.renderer.v1.mesh.QuadEmitter;
@@ -23,19 +21,10 @@ import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.BakedQuad;
 import net.minecraft.client.texture.Sprite;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventories;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockRenderView;
@@ -46,9 +35,7 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class SecretBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory, BlockEntityTicker<SecretBlockEntity> {
-
-	private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(27, ItemStack.EMPTY);  // 9 -> 27
+public class SecretBlockEntityCopy extends BlockEntity implements BlockEntityTicker<SecretBlockEntityCopy> {
 
 	public BlockState upState = Blocks.AIR.getDefaultState();
 	public BlockState downState = Blocks.AIR.getDefaultState();
@@ -71,53 +58,33 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 	public int southRotation = 0;
 	public int westRotation = 0;
 
+	public boolean waxed = false;
+
 	public int age = 0;
 
-	public SecretBlockEntity(BlockPos pos, BlockState state) {
+	public SecretBlockEntityCopy(BlockPos pos, BlockState state) {
 		super(ModEntities.SECRET_BLOCK_ENTITY, pos, state);
 	}
 
 	@Override
-	public void tick(World world, BlockPos pos, BlockState state, SecretBlockEntity blockEntity) {
+	public void tick(World world, BlockPos pos, BlockState state, SecretBlockEntityCopy blockEntity) {
 		if (age % 120 == 0) {
-			refresh();
+//			refresh();  // UNCOMMENT THIS TO MAKE IT WORK
 		}
 		age++;
-	}
-
-	// From the ImplementedInventory Interface
-	@Override
-	public DefaultedList<ItemStack> getItems() {
-		return inventory;
-	}
-
-	// From the NamedScreenHandlerFactory Interface
-	@Override
-	public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-		//We provide *this* to the screenHandler as our class Implements Inventory
-		//Only the Server has the Inventory at the start, this will be synced to the client in the ScreenHandler
-		return new SecretChestScreenHandler(syncId, playerInventory, this);
-	}
-
-	@Override
-	public Text getDisplayName() {
-		return new TranslatableText(getCachedState().getBlock().getTranslationKey());
-		// for 1.19+
-		//return Text.translatable(getCachedState().getBlock().getTranslationKey());
 	}
 
 	@Override
 	public void writeNbt(NbtCompound tag) {
 		super.writeNbt(tag);
 		serialize(tag);
-		Inventories.writeNbt(tag, this.inventory);
 	}
 
 	@Override
 	public void readNbt(NbtCompound tag) {
 		super.readNbt(tag);
+
 		deserialize(tag);
-		Inventories.readNbt(tag, this.inventory);
 		if (this.getWorld() != null && this.getWorld().isClient()) {
 			world.updateListeners(pos, null, null, 0);
 		}
@@ -125,10 +92,8 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 
 	public NbtCompound serialize(NbtCompound tag) {
 
-		// Age
 		tag.putInt("age", age);
 
-		// States
 		tag.put("upState", NbtHelper.fromBlockState(upState));
 		tag.put("downState", NbtHelper.fromBlockState(downState));
 		tag.put("northState", NbtHelper.fromBlockState(northState));
@@ -136,7 +101,8 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 		tag.put("southState", NbtHelper.fromBlockState(southState));
 		tag.put("westState", NbtHelper.fromBlockState(westState));
 
-		// Direction
+		// Separation
+
 		tag.putString("upDirection", upDirection.getName());
 		tag.putString("downDirection", downDirection.getName());
 		tag.putString("northDirection", northDirection.getName());
@@ -144,7 +110,8 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 		tag.putString("southDirection", southDirection.getName());
 		tag.putString("westDirection", westDirection.getName());
 
-		// Rotation
+		// Separation
+
 		tag.putInt("upRotation", upRotation);
 		tag.putInt("downRotation", downRotation);
 		tag.putInt("northRotation", northRotation);
@@ -152,17 +119,18 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 		tag.putInt("southRotation", southRotation);
 		tag.putInt("westRotation", westRotation);
 
+		tag.putBoolean("waxed", waxed);
+
 		return tag;
+
 	}
 
 	public void deserialize(NbtCompound tag) {
 
-		// Age
 		if (tag.contains("age")) {
 			this.age = tag.getInt("age");
 		}
 
-		// States
 		if (tag.contains("upState")) {
 			this.upState = NbtHelper.toBlockState(tag.getCompound("upState"));
 		}
@@ -182,7 +150,8 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 			this.westState = NbtHelper.toBlockState(tag.getCompound("westState"));
 		}
 
-		// Direction
+		// Separation
+
 		if (tag.contains("upDirection")) {
 			upDirection = byName(tag.getString("upDirection"));
 		}
@@ -202,7 +171,8 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 			westDirection = byName(tag.getString("westDirection"));
 		}
 
-		// Rotation
+		// Separation
+
 		if (tag.contains("upRotation")) {
 			upRotation = tag.getInt("upRotation");
 		}
@@ -221,77 +191,86 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 		if (tag.contains("southRotation")) {
 			westRotation = tag.getInt("southRotation");
 		}
+
+		if (tag.contains("waxed")) {
+			waxed = tag.getBoolean("waxed");
+		}
+
 	}
 
 	public void setState(Direction dir, BlockState newState) {
-
-		switch (dir) {
-		case UP:
-			this.upState = newState;
-			break;
-		case DOWN:
-			this.downState = newState;
-			break;
-		case NORTH:
-			this.northState = newState;
-			break;
-		case EAST:
-			this.eastState = newState;
-			break;
-		case SOUTH:
-			this.southState = newState;
-			break;
-		case WEST:
-			this.westState = newState;
-			break;
+		if (!waxed) {
+			switch (dir) {
+			case UP:
+				this.upState = newState;
+				break;
+			case DOWN:
+				this.downState = newState;
+				break;
+			case NORTH:
+				this.northState = newState;
+				break;
+			case EAST:
+				this.eastState = newState;
+				break;
+			case SOUTH:
+				this.southState = newState;
+				break;
+			case WEST:
+				this.westState = newState;
+				break;
+			}
 		}
 		update();
 	}
 
 	public void setState(BlockState newState) {
-
-		this.upState = newState;
-		this.downState = newState;
-		this.northState = newState;
-		this.eastState = newState;
-		this.southState = newState;
-		this.westState = newState;
+		if (!waxed) {
+			this.upState = newState;
+			this.downState = newState;
+			this.northState = newState;
+			this.eastState = newState;
+			this.southState = newState;
+			this.westState = newState;
+		}
 		update();
 	}
 
 	public void setDirection(Direction dir, Direction newDir) {
-
-		switch (dir) {
-		case UP:
-			this.upDirection = newDir;
-			break;
-		case DOWN:
-			this.downDirection = newDir;
-			break;
-		case NORTH:
-			this.northDirection = newDir;
-			break;
-		case EAST:
-			this.eastDirection = newDir;
-			break;
-		case SOUTH:
-			this.southDirection = newDir;
-			break;
-		case WEST:
-			this.westDirection = newDir;
-			break;
+		if (!waxed) {
+			switch (dir) {
+			case UP:
+				this.upDirection = newDir;
+				break;
+			case DOWN:
+				this.downDirection = newDir;
+				break;
+			case NORTH:
+				this.northDirection = newDir;
+				break;
+			case EAST:
+				this.eastDirection = newDir;
+				break;
+			case SOUTH:
+				this.southDirection = newDir;
+				break;
+			case WEST:
+				this.westDirection = newDir;
+				break;
+			}
 		}
 		update();
 	}
 
 	public void setDirection(Direction newDir) {
-
-		this.upDirection = newDir;
-		this.downDirection = newDir;
-		this.northDirection = newDir;
-		this.eastDirection = newDir;
-		this.southDirection = newDir;
-		this.westDirection = newDir;
+		if (!waxed) {
+			this.upDirection = newDir;
+			this.downDirection = newDir;
+			this.northDirection = newDir;
+			this.eastDirection = newDir;
+			this.southDirection = newDir;
+			this.westDirection = newDir;
+		}
 		update();
 	}
 
@@ -412,38 +391,40 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 	}
 
 	public void setRotation(Direction dir, int rotation) {
-
-		switch (dir) {
-		case UP:
-			this.upRotation = rotation;
-			break;
-		case DOWN:
-			this.downRotation = rotation;
-			break;
-		case NORTH:
-			this.northRotation = rotation;
-			break;
-		case EAST:
-			this.eastRotation = rotation;
-			break;
-		case SOUTH:
-			this.southRotation = rotation;
-			break;
-		case WEST:
-			this.westRotation = rotation;
-			break;
+		if (!waxed) {
+			switch (dir) {
+			case UP:
+				this.upRotation = rotation;
+				break;
+			case DOWN:
+				this.downRotation = rotation;
+				break;
+			case NORTH:
+				this.northRotation = rotation;
+				break;
+			case EAST:
+				this.eastRotation = rotation;
+				break;
+			case SOUTH:
+				this.southRotation = rotation;
+				break;
+			case WEST:
+				this.westRotation = rotation;
+				break;
+			}
 		}
 		update();
 	}
 
 	public void setRotation(int rotation) {
-
-		this.upRotation = rotation;
-		this.downRotation = rotation;
-		this.northRotation = rotation;
-		this.eastRotation = rotation;
-		this.southRotation = rotation;
-		this.westRotation = rotation;
+		if (!waxed) {
+			this.upRotation = rotation;
+			this.downRotation = rotation;
+			this.northRotation = rotation;
+			this.eastRotation = rotation;
+			this.southRotation = rotation;
+			this.westRotation = rotation;
+		}
 		update();
 	}
 
@@ -483,6 +464,10 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 			((ServerWorld) world).getChunkManager().markForUpdate(getPos());
 		}
 	}
+
+	//	public Block getRenderAttachmentData() {
+	//		return this.block;
+	//	}
 
 	public static int getRotation(Direction dir, NbtCompound tag) {
 		int tempInt;
@@ -568,6 +553,7 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 					emitter.colorIndex(-1);
 					emitter.spriteColor(0, 0xFFFF_FFFF, 0xFFFF_FFFF, 0xFFFF_FFFF, 0xFFFF_FFFF);
 				}
+
 				emitter.emit();
 			}
 		}
@@ -677,6 +663,7 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0.8125f);
 			}
 			break;
+
 		}
 	}
 
@@ -695,7 +682,9 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 		} else {
 			renderDirection = Direction.NORTH;
 		}
+
 		renderDoorCuboid(emitter, direction, renderDirection);
+
 	}
 
 	private void renderTrapdoor(QuadEmitter emitter, BlockState state, Direction direction) {
@@ -780,6 +769,7 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 
 			break;
 		}
+
 	}
 
 	public static Direction byName(String name) {
@@ -794,16 +784,16 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 			MinecraftClient.getInstance().worldRenderer.scheduleBlockRenders(pos.getX(), pos.getY(), pos.getZ(), pos.getX(), pos.getY(), pos.getZ());
 		}
 	}
-
-	public void refresh() {
-		if (!world.isClient) {
-			for (Direction dir : Direction.values()) {
-				SecretBlocks.updateSide(this.getState(dir), dir, pos, this);
-				SecretBlocks.updateDirection(this.getDir(dir), dir, pos, this);
-				SecretBlocks.updateRotation(this.getRotation(dir), dir, pos, this);
-			}
-		}
-	}
+// UNCOMMENT FOR ORIGINAL STATE
+//	public void refresh() {
+//		if (!world.isClient) {
+//			for (Direction dir : Direction.values()) {
+//				ModBlocks.updateSide(this.getState(dir), dir, pos, this);
+//				ModBlocks.updateDirection(this.getDir(dir), dir, pos, this);
+//				ModBlocks.updateRotation(this.getRotation(dir), dir, pos, this);
+//			}
+//		}
+//	}
 
 	@Override
 	public BlockEntityUpdateS2CPacket toUpdatePacket() {
@@ -814,4 +804,5 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 	public NbtCompound toInitialChunkDataNbt() {
 		return this.createNbt();
 	}
+
 }

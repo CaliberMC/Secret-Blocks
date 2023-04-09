@@ -1,7 +1,9 @@
 package net.calibermc.secretblocks;
 
 import io.netty.buffer.Unpooled;
-import net.calibermc.secretblocks.gui.SecretInventoryScreen;
+import net.calibermc.secretblocks.registry.ModBlocks;
+import net.calibermc.secretblocks.registry.ModScreenHandlers;
+import net.calibermc.secretblocks.screen.SecretChestScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -20,6 +22,8 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
+
+
 @Environment(EnvType.CLIENT)
 public class SecretBlocksClient implements ClientModInitializer {
 
@@ -27,9 +31,9 @@ public class SecretBlocksClient implements ClientModInitializer {
 	public void onInitializeClient() {
 
 
-		HandledScreens.register(SecretBlocks.SECRET_INVENTORY_SCREEN_HANDLER, SecretInventoryScreen::new);  //Screen handler
+		HandledScreens.register(ModScreenHandlers.SECRET_CHEST_SCREEN_HANDLER, SecretChestScreen::new);  //Screen handler
 		ModelLoadingRegistry.INSTANCE.registerResourceProvider(rm -> new SecretBlockResourceProvider());
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), SecretBlocks.secretBlocksList);
+		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.secretBlocksList);
 //		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), SecretBlocks.glassBlocksList);
 
 		ClientPlayNetworking.registerGlobalReceiver(SecretBlocks.id("update_side"), (client, handler, buf, responseSender) -> {

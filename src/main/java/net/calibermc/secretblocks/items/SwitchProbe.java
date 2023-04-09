@@ -3,6 +3,7 @@ package net.calibermc.secretblocks.items;
 import net.calibermc.secretblocks.SecretBlocks;
 import net.calibermc.secretblocks.blocks.SecretBlock;
 import net.calibermc.secretblocks.blocks.entity.SecretBlockEntity;
+import net.calibermc.secretblocks.registry.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -40,27 +41,24 @@ public class SwitchProbe extends Item {
 
 				SecretBlockEntity secretBlockEntity = (SecretBlockEntity) world.getBlockEntity(blockPos);
 
-				if (!secretBlockEntity.waxed) {
-					if (itemStack.getItem() == SecretBlocks.SWITCH_PROBE) {
-						if (itemStack.hasNbt()) {
-							SecretBlocks.updateSide(getState(itemStack), dir, blockPos, secretBlockEntity);
-							SecretBlocks.updateDirection(getDirection(itemStack), dir, blockPos, secretBlockEntity);
-						} else {
-							BlockState stateAdjacent = secretBlockEntity.getState(dir);
-							putStateAndDirection(itemStack, stateAdjacent, dir);
-						}
-					} else if (itemStack.getItem() == SecretBlocks.SWITCH_PROBE_ROTATION_MODE) {
-						SecretBlocks.updateRotation(secretBlockEntity.getRotation(dir) == 270 ? 0 : secretBlockEntity.getRotation(dir) + 90, dir, blockPos, secretBlockEntity);
+				if (itemStack.getItem() == ModItems.SWITCH_PROBE) {
+					if (itemStack.hasNbt()) {
+						SecretBlocks.updateSide(getState(itemStack), dir, blockPos, secretBlockEntity);
+						SecretBlocks.updateDirection(getDirection(itemStack), dir, blockPos, secretBlockEntity);
+					} else {
+						BlockState stateAdjacent = secretBlockEntity.getState(dir);
+						putStateAndDirection(itemStack, stateAdjacent, dir);
 					}
-					secretBlockEntity.refresh();
-					return ActionResult.SUCCESS;
-				} else {
-					return ActionResult.FAIL;
+				} else if (itemStack.getItem() == ModItems.SWITCH_PROBE_ROTATION_MODE) {
+					SecretBlocks.updateRotation(secretBlockEntity.getRotation(dir) == 270 ? 0 : secretBlockEntity.getRotation(dir) + 90, dir, blockPos, secretBlockEntity);
 				}
+				secretBlockEntity.refresh();
+				return ActionResult.SUCCESS;
+
 			} else {
 				return ActionResult.FAIL;
 			}
-		} else if (block != Blocks.AIR && itemStack.getItem() != SecretBlocks.SWITCH_PROBE_ROTATION_MODE) {
+		} else if (block != Blocks.AIR && itemStack.getItem() != ModItems.SWITCH_PROBE_ROTATION_MODE) {
 			putStateAndDirection(itemStack, blockState, dir);
 			return ActionResult.SUCCESS;
 		} else {
@@ -71,7 +69,7 @@ public class SwitchProbe extends Item {
 	@Override
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
 		if (user.isSneaking()) {
-			user.setStackInHand(hand, new ItemStack(user.getStackInHand(hand).getItem() == SecretBlocks.SWITCH_PROBE ? SecretBlocks.SWITCH_PROBE_ROTATION_MODE : SecretBlocks.SWITCH_PROBE));
+			user.setStackInHand(hand, new ItemStack(user.getStackInHand(hand).getItem() == ModItems.SWITCH_PROBE ? ModItems.SWITCH_PROBE_ROTATION_MODE : ModItems.SWITCH_PROBE));
 		}
 		return super.use(world, user, hand);
 	}

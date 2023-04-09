@@ -1,5 +1,6 @@
 package net.calibermc.secretblocks.blocks;
 
+import net.calibermc.secretblocks.SecretBlocks;
 import net.calibermc.secretblocks.SecretBlocksClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -14,9 +15,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -51,14 +49,6 @@ public class SlabBlock extends net.minecraft.block.SlabBlock implements BlockEnt
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		if (world.getBlockEntity(pos) instanceof SecretBlockEntity) {
 			SecretBlockEntity blockEntity = (SecretBlockEntity) world.getBlockEntity(pos);
-			ItemStack itemStack = player.getStackInHand(hand);
-			if (itemStack.getItem() == Items.HONEYCOMB) {
-				if (!blockEntity.waxed) {
-					blockEntity.waxed = true;
-					player.playSound(SoundEvents.BLOCK_HONEY_BLOCK_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
-					return ActionResult.SUCCESS;
-				}
-			}
 		}
 		return super.onUse(state, world, pos, player, hand, hit);
 	}

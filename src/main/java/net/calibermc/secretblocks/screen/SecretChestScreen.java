@@ -1,4 +1,4 @@
-package net.calibermc.secretblocks.gui;
+package net.calibermc.secretblocks.screen;
 
 
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -10,12 +10,12 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class SecretInventoryScreen extends HandledScreen<SecretInventoryScreenHandler> {
+public class SecretChestScreen extends HandledScreen<SecretChestScreenHandler> {
 
     //A path to the gui texture.
-    private static final Identifier TEXTURE = new Identifier("minecraft", "textures/gui/container/dispenser.png");
+    private static final Identifier TEXTURE = new Identifier("minecraft", "textures/gui/container/shulker_box.png");
 
-    public SecretInventoryScreen(SecretInventoryScreenHandler handler, PlayerInventory inventory, Text title) {
+    public SecretChestScreen(SecretChestScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
     }
 

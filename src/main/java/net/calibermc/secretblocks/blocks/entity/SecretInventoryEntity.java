@@ -1,10 +1,8 @@
 package net.calibermc.secretblocks.blocks.entity;
 
-import net.calibermc.secretblocks.SecretBlocks;
-import net.calibermc.secretblocks.gui.SecretInventoryScreenHandler;
+import net.calibermc.secretblocks.screen.SecretChestScreenHandler;
 import net.calibermc.secretblocks.util.ImplementedInventory;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
@@ -17,50 +15,44 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 
-public class SecretInventoryEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
+public class SecretInventoryEntity extends SecretBlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
 
-	private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(9, ItemStack.EMPTY);
+	private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(9, ItemStack.EMPTY);  // 9 -> 27
 
-	public SecretInventoryEntity(BlockPos pos, BlockState state) {
-		super(SecretBlocks.SECRET_INVENTORY_ENTITY, pos, state);
+	public SecretInventoryEntity( BlockPos pos, BlockState state) {
+		super(pos, state);
 	}
 
-	//From the ImplementedInventory Interface
-
+	// From the ImplementedInventory Interface
 	@Override
 	public DefaultedList<ItemStack> getItems() {
 		return inventory;
 	}
 
-	//These Methods are from the NamedScreenHandlerFactory Interface
-	//createMenu creates the ScreenHandler itself
-	//getDisplayName will Provide its name which is normally shown at the top
-
+	// From the NamedScreenHandlerFactory Interface
 	@Override
 	public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
 		//We provide *this* to the screenHandler as our class Implements Inventory
 		//Only the Server has the Inventory at the start, this will be synced to the client in the ScreenHandler
-		return new SecretInventoryScreenHandler(syncId, playerInventory, this);
+		return new SecretChestScreenHandler(syncId, playerInventory, this);
 	}
 
 	@Override
 	public Text getDisplayName() {
-		// for earlier versions
 		return new TranslatableText(getCachedState().getBlock().getTranslationKey());
 		// for 1.19+
 		//return Text.translatable(getCachedState().getBlock().getTranslationKey());
 	}
 
 	@Override
-	public void readNbt(NbtCompound nbt) {
-		super.readNbt(nbt);
-		Inventories.readNbt(nbt, this.inventory);
+	public void readNbt(NbtCompound tag) {
+		super.readNbt(tag);
+		Inventories.readNbt(tag, this.inventory);
 	}
 
 	@Override
-	public void writeNbt(NbtCompound nbt) {
-		super.writeNbt(nbt);
-		Inventories.writeNbt(nbt, this.inventory);
-//		return nbt;
+	public void writeNbt(NbtCompound tag) {
+		super.writeNbt(tag);
+		Inventories.writeNbt(tag, this.inventory);
 	}
 }
