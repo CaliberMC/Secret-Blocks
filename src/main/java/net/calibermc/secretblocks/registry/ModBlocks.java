@@ -28,7 +28,7 @@ public class ModBlocks {
             new GhostBlock(FabricBlockSettings.copy(SOLID_BLOCK).noCollision()), SecretBlocks.SECRET_BLOCKS_GROUP);
 
     public static final Block ONE_WAY_GLASS = registerBlock("one_way_glass",
-            new OneWayGlassBlock(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
+            new OneWayGlassBlock(FabricBlockSettings.copy(SOLID_BLOCK).nonOpaque()), SecretBlocks.SECRET_BLOCKS_GROUP);
 
     public static final Block DOOR_BLOCK = registerBlock("door_block",
             new DoorBlock(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
@@ -50,6 +50,9 @@ public class ModBlocks {
 
     public static final Block SECRET_LEVER = registerBlock("secret_lever",
             new SecretLever(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
+
+//    public static final Block SECRET_LADDER = registerBlock("secret_ladder",
+//            new SecretLadder(SOLID_BLOCK.getDefaultState(), FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
 
 //    public static final Block SECRET_OBSERVER = registerBlock("secret_observer",
 //            new SecretLever(FabricBlockSettings.copy(SOLID_BLOCK)), SecretBlocks.SECRET_BLOCKS_GROUP);
@@ -78,7 +81,7 @@ public class ModBlocks {
 
     };
 
-    //  DISABLED BLOCKS ^ SECRET_DISPENSER, SECRET_HOPPER, PRESSURE_PLATE, SECRET_OBSERVER
+    //  DISABLED BLOCKS ^ SECRET_DISPENSER, SECRET_HOPPER, PRESSURE_PLATE, SECRET_OBSERVER, SECRET_LADDER
     //	public static final Block[] glassBlocksList = {  };  // For future use
 
     // Registry
