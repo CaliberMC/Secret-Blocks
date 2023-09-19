@@ -4,7 +4,6 @@ import net.calibermc.secretblocks.SecretBlocks;
 import net.calibermc.secretblocks.blocks.DoorBlock;
 import net.calibermc.secretblocks.blocks.TrapdoorBlock;
 import net.calibermc.secretblocks.mixin.AccessibleBakedQuad;
-import net.calibermc.secretblocks.mixin.DirectionAccessor;
 import net.calibermc.secretblocks.registry.ModEntities;
 import net.calibermc.secretblocks.screen.SecretChestScreenHandler;
 import net.calibermc.secretblocks.util.ImplementedInventory;
@@ -34,7 +33,6 @@ import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -43,7 +41,6 @@ import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 import java.util.function.Supplier;
 
 public class SecretBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory, BlockEntityTicker<SecretBlockEntity> {
@@ -101,9 +98,9 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 
 	@Override
 	public Text getDisplayName() {
-		return new TranslatableText(getCachedState().getBlock().getTranslationKey());
+
 		// for 1.19+
-		//return Text.translatable(getCachedState().getBlock().getTranslationKey());
+		return Text.translatable(getCachedState().getBlock().getTranslationKey());
 	}
 
 	@Override
@@ -226,24 +223,24 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 	public void setState(Direction dir, BlockState newState) {
 
 		switch (dir) {
-		case UP:
-			this.upState = newState;
-			break;
-		case DOWN:
-			this.downState = newState;
-			break;
-		case NORTH:
-			this.northState = newState;
-			break;
-		case EAST:
-			this.eastState = newState;
-			break;
-		case SOUTH:
-			this.southState = newState;
-			break;
-		case WEST:
-			this.westState = newState;
-			break;
+			case UP:
+				this.upState = newState;
+				break;
+			case DOWN:
+				this.downState = newState;
+				break;
+			case NORTH:
+				this.northState = newState;
+				break;
+			case EAST:
+				this.eastState = newState;
+				break;
+			case SOUTH:
+				this.southState = newState;
+				break;
+			case WEST:
+				this.westState = newState;
+				break;
 		}
 		update();
 	}
@@ -262,24 +259,24 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 	public void setDirection(Direction dir, Direction newDir) {
 
 		switch (dir) {
-		case UP:
-			this.upDirection = newDir;
-			break;
-		case DOWN:
-			this.downDirection = newDir;
-			break;
-		case NORTH:
-			this.northDirection = newDir;
-			break;
-		case EAST:
-			this.eastDirection = newDir;
-			break;
-		case SOUTH:
-			this.southDirection = newDir;
-			break;
-		case WEST:
-			this.westDirection = newDir;
-			break;
+			case UP:
+				this.upDirection = newDir;
+				break;
+			case DOWN:
+				this.downDirection = newDir;
+				break;
+			case NORTH:
+				this.northDirection = newDir;
+				break;
+			case EAST:
+				this.eastDirection = newDir;
+				break;
+			case SOUTH:
+				this.southDirection = newDir;
+				break;
+			case WEST:
+				this.westDirection = newDir;
+				break;
 		}
 		update();
 	}
@@ -299,24 +296,24 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 		BlockState tempState;
 		switch (dir) {
 			case DOWN:
-			tempState = downState;
-			break;
-		case NORTH:
-			tempState = northState;
-			break;
-		case EAST:
-			tempState = eastState;
-			break;
-		case SOUTH:
-			tempState = southState;
-			break;
-		case WEST:
-			tempState = westState;
-			break;
+				tempState = downState;
+				break;
+			case NORTH:
+				tempState = northState;
+				break;
+			case EAST:
+				tempState = eastState;
+				break;
+			case SOUTH:
+				tempState = southState;
+				break;
+			case WEST:
+				tempState = westState;
+				break;
 			case UP:
 			default:
-			tempState = upState;
-			break;
+				tempState = upState;
+				break;
 		}
 		return tempState;
 	}
@@ -325,36 +322,36 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 		BlockState tempState = Blocks.STONE.getDefaultState();
 		switch (dir) {
 			case DOWN:
-			if (tag.contains("downState")) {
-				tempState = NbtHelper.toBlockState(tag.getCompound("downState"));
-			}
-			break;
-		case NORTH:
-			if (tag.contains("northState")) {
-				tempState = NbtHelper.toBlockState(tag.getCompound("northState"));
-			}
-			break;
-		case EAST:
-			if (tag.contains("eastState")) {
-				tempState = NbtHelper.toBlockState(tag.getCompound("eastState"));
-			}
-			break;
-		case SOUTH:
-			if (tag.contains("southState")) {
-				tempState = NbtHelper.toBlockState(tag.getCompound("southState"));
-			}
-			break;
-		case WEST:
-			if (tag.contains("westState")) {
-				tempState = NbtHelper.toBlockState(tag.getCompound("westState"));
-			}
-			break;
+				if (tag.contains("downState")) {
+					tempState = NbtHelper.toBlockState(tag.getCompound("downState"));
+				}
+				break;
+			case NORTH:
+				if (tag.contains("northState")) {
+					tempState = NbtHelper.toBlockState(tag.getCompound("northState"));
+				}
+				break;
+			case EAST:
+				if (tag.contains("eastState")) {
+					tempState = NbtHelper.toBlockState(tag.getCompound("eastState"));
+				}
+				break;
+			case SOUTH:
+				if (tag.contains("southState")) {
+					tempState = NbtHelper.toBlockState(tag.getCompound("southState"));
+				}
+				break;
+			case WEST:
+				if (tag.contains("westState")) {
+					tempState = NbtHelper.toBlockState(tag.getCompound("westState"));
+				}
+				break;
 			case UP:
 			default:
-			if (tag.contains("upState")) {
-				tempState = NbtHelper.toBlockState(tag.getCompound("upState"));
-			}
-			break;
+				if (tag.contains("upState")) {
+					tempState = NbtHelper.toBlockState(tag.getCompound("upState"));
+				}
+				break;
 		}
 		return tempState;
 	}
@@ -363,24 +360,24 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 		Direction tempDir;
 		switch (dir) {
 			case DOWN:
-			tempDir = downDirection;
-			break;
-		case NORTH:
-			tempDir = northDirection;
-			break;
-		case EAST:
-			tempDir = eastDirection;
-			break;
-		case SOUTH:
-			tempDir = southDirection;
-			break;
-		case WEST:
-			tempDir = westDirection;
-			break;
+				tempDir = downDirection;
+				break;
+			case NORTH:
+				tempDir = northDirection;
+				break;
+			case EAST:
+				tempDir = eastDirection;
+				break;
+			case SOUTH:
+				tempDir = southDirection;
+				break;
+			case WEST:
+				tempDir = westDirection;
+				break;
 			case UP:
 			default:
-			tempDir = upDirection;
-			break;
+				tempDir = upDirection;
+				break;
 		}
 		return tempDir;
 	}
@@ -389,24 +386,24 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 		Direction tempDir;
 		switch (dir) {
 			case DOWN:
-			tempDir = byName(tag.getString("downDirection"));
-			break;
-		case NORTH:
-			tempDir = byName(tag.getString("northDirection"));
-			break;
-		case EAST:
-			tempDir = byName(tag.getString("eastDirection"));
-			break;
-		case SOUTH:
-			tempDir = byName(tag.getString("southDirection"));
-			break;
-		case WEST:
-			tempDir = byName(tag.getString("westDirection"));
-			break;
+				tempDir = byName(tag.getString("downDirection"));
+				break;
+			case NORTH:
+				tempDir = byName(tag.getString("northDirection"));
+				break;
+			case EAST:
+				tempDir = byName(tag.getString("eastDirection"));
+				break;
+			case SOUTH:
+				tempDir = byName(tag.getString("southDirection"));
+				break;
+			case WEST:
+				tempDir = byName(tag.getString("westDirection"));
+				break;
 			case UP:
 			default:
-			tempDir = byName(tag.getString("upDirection"));
-			break;
+				tempDir = byName(tag.getString("upDirection"));
+				break;
 		}
 		return tempDir;
 	}
@@ -414,24 +411,24 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 	public void setRotation(Direction dir, int rotation) {
 
 		switch (dir) {
-		case UP:
-			this.upRotation = rotation;
-			break;
-		case DOWN:
-			this.downRotation = rotation;
-			break;
-		case NORTH:
-			this.northRotation = rotation;
-			break;
-		case EAST:
-			this.eastRotation = rotation;
-			break;
-		case SOUTH:
-			this.southRotation = rotation;
-			break;
-		case WEST:
-			this.westRotation = rotation;
-			break;
+			case UP:
+				this.upRotation = rotation;
+				break;
+			case DOWN:
+				this.downRotation = rotation;
+				break;
+			case NORTH:
+				this.northRotation = rotation;
+				break;
+			case EAST:
+				this.eastRotation = rotation;
+				break;
+			case SOUTH:
+				this.southRotation = rotation;
+				break;
+			case WEST:
+				this.westRotation = rotation;
+				break;
 		}
 		update();
 	}
@@ -450,27 +447,27 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 	public int getRotation(Direction dir) {
 		int tempInt;
 		switch (dir) {
-		case UP:
-			tempInt = upRotation;
-			break;
-		case DOWN:
-			tempInt = downRotation;
-			break;
-		case NORTH:
-			tempInt = northRotation;
-			break;
-		case EAST:
-			tempInt = eastRotation;
-			break;
-		case SOUTH:
-			tempInt = southRotation;
-			break;
-		case WEST:
-			tempInt = westRotation;
-			break;
-		default:
-			tempInt = upRotation;
-			break;
+			case UP:
+				tempInt = upRotation;
+				break;
+			case DOWN:
+				tempInt = downRotation;
+				break;
+			case NORTH:
+				tempInt = northRotation;
+				break;
+			case EAST:
+				tempInt = eastRotation;
+				break;
+			case SOUTH:
+				tempInt = southRotation;
+				break;
+			case WEST:
+				tempInt = westRotation;
+				break;
+			default:
+				tempInt = upRotation;
+				break;
 		}
 		return tempInt;
 	}
@@ -488,30 +485,30 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 		int tempInt;
 		switch (dir) {
 			case DOWN:
-			tempInt = tag.getInt("downRotation");
-			break;
-		case NORTH:
-			tempInt = tag.getInt("northRotation");
-			break;
-		case EAST:
-			tempInt = tag.getInt("eastRotation");
-			break;
-		case SOUTH:
-			tempInt = tag.getInt("southRotation");
-			break;
-		case WEST:
-			tempInt = tag.getInt("westRotation");
-			break;
+				tempInt = tag.getInt("downRotation");
+				break;
+			case NORTH:
+				tempInt = tag.getInt("northRotation");
+				break;
+			case EAST:
+				tempInt = tag.getInt("eastRotation");
+				break;
+			case SOUTH:
+				tempInt = tag.getInt("southRotation");
+				break;
+			case WEST:
+				tempInt = tag.getInt("westRotation");
+				break;
 			case UP:
 			default:
-			tempInt = tag.getInt("upRotation");
-			break;
+				tempInt = tag.getInt("upRotation");
+				break;
 		}
 		return tempInt;
 	}
 
 	@Environment(EnvType.CLIENT)
-	public void renderBlock(BlockRenderView blockView, BlockState state, BlockPos pos, Supplier<Random> randomSupplier, RenderContext context) {
+	public void renderBlock(BlockRenderView blockView, BlockState state, BlockPos pos, Supplier<net.minecraft.util.math.random.Random> randomSupplier, RenderContext context) {
 
 		QuadEmitter emitter = context.getEmitter();
 
@@ -540,7 +537,7 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 			}
 
 			BakedModel fullModel = MinecraftClient.getInstance().getBlockRenderManager().getModel(tempState);
-			List<BakedQuad> abqList = fullModel.getQuads(tempState, tempDirection, randomSupplier.get());
+			List<BakedQuad> abqList = fullModel.getQuads(tempState, tempDirection,  randomSupplier.get());
 
 			BlockColors colors = MinecraftClient.getInstance().getBlockColors();
 			int color = 0xFF00_0000 | colors.getColor(tempState, blockView, pos, 0xFF);
@@ -576,107 +573,107 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 	private void renderDoorCuboid(QuadEmitter emitter, Direction faceDirection, Direction cuboidDirection) {
 		switch (cuboidDirection) {
 
-		case NORTH:
+			case NORTH:
 
-			if (faceDirection == Direction.NORTH) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0f);
-			} else if (faceDirection == Direction.SOUTH) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0.8125f);
-			} else if (faceDirection == Direction.EAST) {
-				emitter.square(faceDirection, 0.8125f, 0.0f, 1.0f, 1.0f, 0.0f);
-			} else if (faceDirection == Direction.WEST) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 0.1875f, 1.0f, 0.0f);
-			} else if (faceDirection == Direction.UP) {
-				emitter.square(faceDirection, 0.0f, 0.8125f, 1.0f, 1.0f, 0.0f);
-			} else if (faceDirection == Direction.DOWN) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 0.1875f, 0.0f);
-			}
-			break;
+				if (faceDirection == Direction.NORTH) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0f);
+				} else if (faceDirection == Direction.SOUTH) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0.8125f);
+				} else if (faceDirection == Direction.EAST) {
+					emitter.square(faceDirection, 0.8125f, 0.0f, 1.0f, 1.0f, 0.0f);
+				} else if (faceDirection == Direction.WEST) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 0.1875f, 1.0f, 0.0f);
+				} else if (faceDirection == Direction.UP) {
+					emitter.square(faceDirection, 0.0f, 0.8125f, 1.0f, 1.0f, 0.0f);
+				} else if (faceDirection == Direction.DOWN) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 0.1875f, 0.0f);
+				}
+				break;
 
-		case EAST:
+			case EAST:
 
-			if (faceDirection == Direction.SOUTH) {
-				emitter.square(faceDirection, 0.8125f, 0.0f, 1.0f, 1.0f, 0.0f);
-			} else if (faceDirection == Direction.NORTH) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 0.1875f, 1.0f, 0.0f);
-			} else if (faceDirection == Direction.EAST) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0f);
-			} else if (faceDirection == Direction.WEST) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0.8125f);
-			} else if (faceDirection == Direction.UP) {
-				emitter.square(faceDirection, 0.8125f, 0.0f, 1.0f, 1.0f, 0.0f);
-			} else if (faceDirection == Direction.DOWN) {
-				emitter.square(faceDirection, 0.8125f, 0.0f, 1.0f, 1.0f, 0.0f);
-			}
-			break;
+				if (faceDirection == Direction.SOUTH) {
+					emitter.square(faceDirection, 0.8125f, 0.0f, 1.0f, 1.0f, 0.0f);
+				} else if (faceDirection == Direction.NORTH) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 0.1875f, 1.0f, 0.0f);
+				} else if (faceDirection == Direction.EAST) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0f);
+				} else if (faceDirection == Direction.WEST) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0.8125f);
+				} else if (faceDirection == Direction.UP) {
+					emitter.square(faceDirection, 0.8125f, 0.0f, 1.0f, 1.0f, 0.0f);
+				} else if (faceDirection == Direction.DOWN) {
+					emitter.square(faceDirection, 0.8125f, 0.0f, 1.0f, 1.0f, 0.0f);
+				}
+				break;
 
-		case SOUTH:
+			case SOUTH:
 
-			if (faceDirection == Direction.SOUTH) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0f);
-			} else if (faceDirection == Direction.NORTH) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0.8125f);
-			} else if (faceDirection == Direction.WEST) {
-				emitter.square(faceDirection, 0.8125f, 0.0f, 1.0f, 1.0f, 0.0f);
-			} else if (faceDirection == Direction.EAST) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 0.1875f, 1.0f, 0.0f);
-			} else if (faceDirection == Direction.DOWN) {
-				emitter.square(faceDirection, 0.0f, 0.8125f, 1.0f, 1.0f, 0.0f);
-			} else if (faceDirection == Direction.UP) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 0.1875f, 0.0f);
-			}
-			break;
+				if (faceDirection == Direction.SOUTH) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0f);
+				} else if (faceDirection == Direction.NORTH) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0.8125f);
+				} else if (faceDirection == Direction.WEST) {
+					emitter.square(faceDirection, 0.8125f, 0.0f, 1.0f, 1.0f, 0.0f);
+				} else if (faceDirection == Direction.EAST) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 0.1875f, 1.0f, 0.0f);
+				} else if (faceDirection == Direction.DOWN) {
+					emitter.square(faceDirection, 0.0f, 0.8125f, 1.0f, 1.0f, 0.0f);
+				} else if (faceDirection == Direction.UP) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 0.1875f, 0.0f);
+				}
+				break;
 
-		case WEST:
+			case WEST:
 
-			if (faceDirection == Direction.NORTH) {
-				emitter.square(faceDirection, 0.8125f, 0.0f, 1.0f, 1.0f, 0.0f);
-			} else if (faceDirection == Direction.SOUTH) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 0.1875f, 1.0f, 0.0f);
-			} else if (faceDirection == Direction.WEST) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0f);
-			} else if (faceDirection == Direction.EAST) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0.8125f);
-			} else if (faceDirection == Direction.UP) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 0.1875f, 1.0f, 0.0f);
-			} else if (faceDirection == Direction.DOWN) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 0.1875f, 1.0f, 0.0f);
-			}
-			break;
+				if (faceDirection == Direction.NORTH) {
+					emitter.square(faceDirection, 0.8125f, 0.0f, 1.0f, 1.0f, 0.0f);
+				} else if (faceDirection == Direction.SOUTH) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 0.1875f, 1.0f, 0.0f);
+				} else if (faceDirection == Direction.WEST) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0f);
+				} else if (faceDirection == Direction.EAST) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0.8125f);
+				} else if (faceDirection == Direction.UP) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 0.1875f, 1.0f, 0.0f);
+				} else if (faceDirection == Direction.DOWN) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 0.1875f, 1.0f, 0.0f);
+				}
+				break;
 
-		case UP:
+			case UP:
 
-			if (faceDirection == Direction.SOUTH) {
-				emitter.square(faceDirection, 0.0f, 0.8125f, 1.0f, 1.0f, 0.0f);
-			} else if (faceDirection == Direction.NORTH) {
-				emitter.square(faceDirection, 0.0f, 0.8125f, 1.0f, 1.0f, 0.0f);
-			} else if (faceDirection == Direction.WEST) {
-				emitter.square(faceDirection, 0.0f, 0.8125f, 1.0f, 1.0f, 0.0f);
-			} else if (faceDirection == Direction.EAST) {
-				emitter.square(faceDirection, 0.0f, 0.8125f, 1.0f, 1.0f, 0.0f);
-			} else if (faceDirection == Direction.UP) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
-			} else if (faceDirection == Direction.DOWN) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0.8125f);
-			}
-			break;
+				if (faceDirection == Direction.SOUTH) {
+					emitter.square(faceDirection, 0.0f, 0.8125f, 1.0f, 1.0f, 0.0f);
+				} else if (faceDirection == Direction.NORTH) {
+					emitter.square(faceDirection, 0.0f, 0.8125f, 1.0f, 1.0f, 0.0f);
+				} else if (faceDirection == Direction.WEST) {
+					emitter.square(faceDirection, 0.0f, 0.8125f, 1.0f, 1.0f, 0.0f);
+				} else if (faceDirection == Direction.EAST) {
+					emitter.square(faceDirection, 0.0f, 0.8125f, 1.0f, 1.0f, 0.0f);
+				} else if (faceDirection == Direction.UP) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
+				} else if (faceDirection == Direction.DOWN) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0.8125f);
+				}
+				break;
 
-		case DOWN:
+			case DOWN:
 
-			if (faceDirection == Direction.SOUTH) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 0.1875f, 0.0f);
-			} else if (faceDirection == Direction.NORTH) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 0.1875f, 0.0f);
-			} else if (faceDirection == Direction.WEST) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 0.1875f, 0.0f);
-			} else if (faceDirection == Direction.EAST) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 0.1875f, 0.0f);
-			} else if (faceDirection == Direction.DOWN) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
-			} else if (faceDirection == Direction.UP) {
-				emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0.8125f);
-			}
-			break;
+				if (faceDirection == Direction.SOUTH) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 0.1875f, 0.0f);
+				} else if (faceDirection == Direction.NORTH) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 0.1875f, 0.0f);
+				} else if (faceDirection == Direction.WEST) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 0.1875f, 0.0f);
+				} else if (faceDirection == Direction.EAST) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 0.1875f, 0.0f);
+				} else if (faceDirection == Direction.DOWN) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
+				} else if (faceDirection == Direction.UP) {
+					emitter.square(faceDirection, 0.0f, 0.0f, 1.0f, 1.0f, 0.8125f);
+				}
+				break;
 		}
 	}
 
@@ -725,65 +722,65 @@ public class SecretBlockEntity extends BlockEntity implements NamedScreenHandler
 		float v3 = emitter.spriteV(3, 0);
 
 		switch (rotation) {
-		case 0:
-			if (dir.equals(Direction.UP)) {
-				emitter.sprite(0, 0, u3, v3);
-				emitter.sprite(1, 0, u2, v2);
-				emitter.sprite(2, 0, u1, v1);
-				emitter.sprite(3, 0, u0, v0);
-			} else {
-				emitter.sprite(0, 0, u0, v0);
-				emitter.sprite(1, 0, u1, v1);
-				emitter.sprite(2, 0, u2, v2);
-				emitter.sprite(3, 0, u3, v3);
-			}
-			break;
-		case 90:
-			if (dir.equals(Direction.UP)) {
-				emitter.sprite(0, 0, u0, v0);
-				emitter.sprite(1, 0, u3, v3);
-				emitter.sprite(2, 0, u2, v2);
-				emitter.sprite(3, 0, u1, v1);
-			} else {
-				emitter.sprite(0, 0, u1, v1);
-				emitter.sprite(1, 0, u2, v2);
-				emitter.sprite(2, 0, u3, v3);
-				emitter.sprite(3, 0, u0, v0);
-			}
-			break;
-		case 180:
-			if (dir.equals(Direction.UP)) {
-				emitter.sprite(0, 0, u1, v1);
-				emitter.sprite(1, 0, u0, v0);
-				emitter.sprite(2, 0, u3, v3);
-				emitter.sprite(3, 0, u2, v2);
-			} else {
-				emitter.sprite(0, 0, u2, v2);
-				emitter.sprite(1, 0, u3, v3);
-				emitter.sprite(2, 0, u0, v0);
-				emitter.sprite(3, 0, u1, v1);
-			}
+			case 0:
+				if (dir.equals(Direction.UP)) {
+					emitter.sprite(0, 0, u3, v3);
+					emitter.sprite(1, 0, u2, v2);
+					emitter.sprite(2, 0, u1, v1);
+					emitter.sprite(3, 0, u0, v0);
+				} else {
+					emitter.sprite(0, 0, u0, v0);
+					emitter.sprite(1, 0, u1, v1);
+					emitter.sprite(2, 0, u2, v2);
+					emitter.sprite(3, 0, u3, v3);
+				}
+				break;
+			case 90:
+				if (dir.equals(Direction.UP)) {
+					emitter.sprite(0, 0, u0, v0);
+					emitter.sprite(1, 0, u3, v3);
+					emitter.sprite(2, 0, u2, v2);
+					emitter.sprite(3, 0, u1, v1);
+				} else {
+					emitter.sprite(0, 0, u1, v1);
+					emitter.sprite(1, 0, u2, v2);
+					emitter.sprite(2, 0, u3, v3);
+					emitter.sprite(3, 0, u0, v0);
+				}
+				break;
+			case 180:
+				if (dir.equals(Direction.UP)) {
+					emitter.sprite(0, 0, u1, v1);
+					emitter.sprite(1, 0, u0, v0);
+					emitter.sprite(2, 0, u3, v3);
+					emitter.sprite(3, 0, u2, v2);
+				} else {
+					emitter.sprite(0, 0, u2, v2);
+					emitter.sprite(1, 0, u3, v3);
+					emitter.sprite(2, 0, u0, v0);
+					emitter.sprite(3, 0, u1, v1);
+				}
 
-			break;
-		case 270:
-			if (dir.equals(Direction.UP)) {
-				emitter.sprite(0, 0, u2, v2);
-				emitter.sprite(1, 0, u1, v1);
-				emitter.sprite(2, 0, u0, v0);
-				emitter.sprite(3, 0, u3, v3);
-			} else {
-				emitter.sprite(0, 0, u3, v3);
-				emitter.sprite(1, 0, u0, v0);
-				emitter.sprite(2, 0, u1, v1);
-				emitter.sprite(3, 0, u2, v2);
-			}
+				break;
+			case 270:
+				if (dir.equals(Direction.UP)) {
+					emitter.sprite(0, 0, u2, v2);
+					emitter.sprite(1, 0, u1, v1);
+					emitter.sprite(2, 0, u0, v0);
+					emitter.sprite(3, 0, u3, v3);
+				} else {
+					emitter.sprite(0, 0, u3, v3);
+					emitter.sprite(1, 0, u0, v0);
+					emitter.sprite(2, 0, u1, v1);
+					emitter.sprite(3, 0, u2, v2);
+				}
 
-			break;
+				break;
 		}
 	}
 
 	public static Direction byName(String name) {
-		return name == null ? null : (Direction) DirectionAccessor.NAME_MAP().get(name.toLowerCase(Locale.ROOT));
+		return Direction.byName(name.toLowerCase(Locale.ROOT));
 	}
 
 	public void update() {

@@ -22,12 +22,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockRenderView;
+import org.jetbrains.annotations.Nullable;
 
 public class SecretBlockBakedModel implements FabricBakedModel, BakedModel {
 
+
+
 	@Override
-	public List<BakedQuad> getQuads(BlockState state, Direction face, Random random) {
-		return new ArrayList<>();
+	public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction face, net.minecraft.util.math.random.Random random) {
+		if(state==null || face == null) {
+			return null;
+		}else  {
+			return new ArrayList<>();
+		}
 	}
 
 	@Override
@@ -71,7 +78,7 @@ public class SecretBlockBakedModel implements FabricBakedModel, BakedModel {
 	}
 
 	@Override
-	public void emitBlockQuads(BlockRenderView blockView, BlockState state, BlockPos pos, Supplier<Random> randomSupplier, RenderContext context) {
+	public void emitBlockQuads(BlockRenderView blockView, BlockState state, BlockPos pos, Supplier<net.minecraft.util.math.random.Random> randomSupplier, RenderContext context) {
 		BlockEntity entity = blockView.getBlockEntity(pos);
 		if (entity instanceof SecretBlockEntity) {
 			((SecretBlockEntity) entity).renderBlock(blockView, state, pos, randomSupplier, context);
@@ -79,8 +86,11 @@ public class SecretBlockBakedModel implements FabricBakedModel, BakedModel {
 	}
 
 	@Override
-	public void emitItemQuads(ItemStack stack, Supplier<Random> randomSupplier, RenderContext context) {
+	public void emitItemQuads(ItemStack stack, Supplier<net.minecraft.util.math.random.Random> randomSupplier, RenderContext context) {
 
 	}
+
+
+
 
 }

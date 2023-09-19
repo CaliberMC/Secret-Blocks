@@ -11,7 +11,10 @@ version = project.minecraft_version+ "-" +project.mod_version
 group = project.maven_group
 
 repositories {
-	maven { url "https://oskarstrom.net/maven" }
+	maven {
+		url "https://cursemaven.com"
+
+	}
 }
 
 dependencies {
@@ -19,7 +22,6 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modImplementation "net.oskarstrom:DashLoader:${project.dashloader_version}"
 }
 
 def includeMod(String dep) {
